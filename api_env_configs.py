@@ -53,7 +53,6 @@ configs = EnvConfigs(
     ),
     epigraphdb_db_version=EnvVar(
         "EPIGRAPHDB_DB_VERSION",
-        secret=True,
         desc="""
         EpiGraphDB graph: version number
         """,
@@ -87,7 +86,6 @@ configs = EnvConfigs(
     ),
     pqtl_db_version=EnvVar(
         "PQTL_DB_VERSION",
-        secret=True,
         desc="""
         PQTL graph: version number
         """,
