@@ -53,7 +53,7 @@ class EnvVar:
             name=self.name,
             desc=dedent(self.desc).strip() if self.desc is not None else "",
         )
-        value_section = "value: {value}\ndefault: {default}\n".format(
+        value_section = "value: {value}\tdefault: {default}\n".format(
             value=self.value_display, default=self.default
         )
         rest_section = "{secret}".format(
