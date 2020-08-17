@@ -3,7 +3,7 @@ Environment variables used in the EpiGraphDB API documentation
 """
 from .env_utils import EnvConfigs, EnvVar
 
-configs = EnvConfigs(
+env_configs = EnvConfigs(
     api_url=EnvVar(
         "API_URL",
         default="https://api.epigraphdb.org",

@@ -3,7 +3,7 @@ Environment variables used in the EpiGraphDB API python server
 """
 from .env_utils import EnvConfigs, EnvVar
 
-configs = EnvConfigs(
+env_configs = EnvConfigs(
     api_private_access=EnvVar(
         "API_PRIVATE_ACCESS",
         default=True,
