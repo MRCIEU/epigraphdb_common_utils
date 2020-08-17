@@ -42,10 +42,10 @@ class EnvVar:
         self.value = self.default
         value_init = self.env(self.name, self.default)
         if value_init is not None:
-            self.value = value_init
+            self.value = type(value_init)
             self.use_default = False
         self.value_display = self.value
-        if self.secret:
+        if self.secret and value_init is not None:
             self.value_display = str(self.value)[:3] + "******"
 
     def __repr__(self):
