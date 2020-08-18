@@ -11,6 +11,12 @@ At the moment, the common utils contain the following
 - environment variable usage by various components,
   i.e. python servers and docker containers.
 
+## Dependency
+
+- python 3.7
+- environs
+- colorama
+
 ## Environment variable configs
 
 When setting up the API, check the following configs:
