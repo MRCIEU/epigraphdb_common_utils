@@ -1,6 +1,6 @@
 from pprint import pformat
 from textwrap import dedent
-from typing import Any, Optional
+from typing import Any, Dict, Optional
 
 import environs
 from colorama import Fore, Style
@@ -36,6 +36,8 @@ class EnvVar:
         self.default = default
         self.secret = secret
         self.desc = desc
+        if self.desc is not None:
+            self.desc = dedent(self.desc).strip()
         self.env = environs_env
 
         # Process values
@@ -51,12 +53,7 @@ class EnvVar:
 
     def __repr__(self):
         if self.desc is not None:
-            desc = (
-                Style.DIM
-                + Fore.YELLOW
-                + dedent(self.desc).strip()
-                + Style.RESET_ALL
-            )
+            desc = Style.DIM + Fore.YELLOW + self.desc + Style.RESET_ALL
         else:
             desc = ""
         header_section = "variable: {name}\n{desc}\n".format(
@@ -78,7 +75,7 @@ class EnvVar:
                 + Style.RESET_ALL
             )
         value_section = "value: {value}\tdefault: {default}\n".format(
-            value=value_display, default=self.default,
+            value=value_display, default=self.default
         )
         rest_section = "{secret}".format(
             secret=Style.DIM + Fore.WHITE + "Secrect" + Style.RESET_ALL
@@ -89,6 +86,17 @@ class EnvVar:
             rest_section += "\n"
         message = f"{header_section}{value_section}{rest_section}---\n"
         return message
+
+    def configs_to_dict(self) -> Dict:
+        res = {
+            "name": self.name,
+            "value": self.value,
+            "value_display": self.value_display,
+            "default": self.default,
+            "desc": self.desc,
+            "secret": self.secret,
+        }
+        return res
 
 
 class EnvConfigs:
@@ -108,3 +116,8 @@ class EnvConfigs:
 
     def __repr__(self):
         return pformat(vars(self))
+
+    def items(self):
+        keys = list(vars(self).keys())
+        res_dict = {key: getattr(self, key).configs_to_dict() for key in keys}
+        return res_dict.items()
