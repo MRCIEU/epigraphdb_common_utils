@@ -3,6 +3,7 @@ from textwrap import dedent
 from typing import Any, Optional
 
 import environs
+from colorama import Fore, Style
 
 env = environs.Env()
 env.read_env()
@@ -41,23 +42,48 @@ class EnvVar:
         self.use_default: bool = True
         self.value = self.default
         value_init = self.env(self.name, self.default)
-        if value_init is not None:
+        if value_init is not None and type(value_init) != self.default:
             self.value = type(value_init)
             self.use_default = False
-        self.value_display = self.value
+        self.value_display = str(self.value)
         if self.secret and value_init is not None:
             self.value_display = str(self.value)[:3] + "******"
 
     def __repr__(self):
+        if self.desc is not None:
+            desc = (
+                Style.DIM
+                + Fore.YELLOW
+                + dedent(self.desc).strip()
+                + Style.RESET_ALL
+            )
+        else:
+            desc = ""
         header_section = "variable: {name}\n{desc}\n".format(
-            name=self.name,
-            desc=dedent(self.desc).strip() if self.desc is not None else "",
+            name=Style.BRIGHT + Fore.BLUE + self.name + Style.RESET_ALL,
+            desc=desc,
         )
+        if self.use_default:
+            value_display = (
+                Style.BRIGHT
+                + Fore.WHITE
+                + self.value_display
+                + Style.RESET_ALL
+            )
+        else:
+            value_display = (
+                Style.BRIGHT
+                + Fore.YELLOW
+                + self.value_display
+                + Style.RESET_ALL
+            )
         value_section = "value: {value}\tdefault: {default}\n".format(
-            value=self.value_display, default=self.default
+            value=value_display, default=self.default,
         )
         rest_section = "{secret}".format(
-            secret="Secrect" if self.secret else ""
+            secret=Style.DIM + Fore.WHITE + "Secrect" + Style.RESET_ALL
+            if self.secret
+            else ""
         )
         if rest_section != "":
             rest_section += "\n"
