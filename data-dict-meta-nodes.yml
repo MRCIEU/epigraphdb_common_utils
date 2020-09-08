@@ -1,0 +1,188 @@
+Meta:
+  id: null
+  name: null
+  doc: >-
+    Metadata information of EpiGraphDB Graph.
+  keys:
+    - build_date:
+        doc: >-
+          Date of the database build.
+    - graph_version:
+        doc: >-
+          Version of the database build.
+Drug:
+  id: label
+  name: label
+  doc: >-
+    Drug data from Open Targets.
+  keys:
+    - label:
+        doc: >-
+          Label of the drug
+    - molecule_type:
+        doc: >-
+          Type of the molecule, e.g. Antibody, Protein, Enzyme, etc.
+    - chembl_uri:
+        doc: >-
+          URI from chembl.
+Efo:
+  id: id
+  name: value
+  doc: >-
+    Experimental Factor Ontology.
+  keys:
+    - id
+    - value
+    - type
+Event:
+  id: reactome_id
+  name: name
+  doc: >-
+    Event
+  keys:
+    - name
+    - in_disease
+    - reactome_id
+Gene:
+  id: ensembl_id
+  name: name
+  doc: >-
+    Gene data from BioMart (build 37).
+
+    Gene druggability data comes from Finan et al (2017).
+  keys:
+    - chr
+    - type
+    - name:
+        doc: >-
+          HGNC name of the gene.
+    - source:
+        doc: >-
+          Source of the gene.
+    - ensembl_id:
+        doc: >-
+          Ensemble identifier of the gene.
+
+          Used as the identifier of EpiGraphDB Gene.
+    - start
+    - end
+    - description
+    - reactome_id
+    - adme_gene
+    - small_mol_druggable
+    - bio_druggable
+    - druggability_tier
+Tissue:
+  id: tissue
+  name: tissue
+  doc: >-
+    Tissue specific gene expression from GTEx
+  keys:
+    - tissue
+Gwas:
+  id: id
+  name: trait
+  doc: >-
+    Genome Wide Association Studies metadata from
+    IEU OpenGWAS Database.
+
+    https://gwas.mrcieu.ac.uk
+  keys:
+    - note
+    - access
+    - mr
+    - year
+    - author
+    - consortium
+    - sex
+    - pmid
+    - priority
+    - population
+    - unit
+    - nsnp
+    - sample_size
+    - trait:
+        doc: >-
+          Name of the phenotypic trait
+    - id:
+        doc: >-
+          OpenGWAS identifier
+    - category
+    - subcategory
+    - ncase
+    - ncontrol
+    - sd
+Literature:
+  id: pubmed_id
+  name: pubmed_id
+  doc: >-
+    PubMed literature data as available from SemMedDB.
+  keys:
+    - pubmed_id
+    - issn
+    - dp
+    - year
+    - edat
+Pathway:
+  id: reactome_id
+  name: name
+  doc: >-
+    Biological pathway data from Reactome.
+  keys:
+    - name:
+        doc: >-
+          Name of the pathway.
+    - in_disease
+    - reactome_id:
+        doc: >-
+          Reactome identifier of the pathway.
+Protein:
+  id: uniprot_id
+  name: uniprot_id
+  doc: >-
+    Protein data from BioMart web service (build 37).
+  keys:
+    - uniprot_id:
+        doc: >-
+          UniProt Identifier.
+Disease:
+  id: id
+  name: label
+  doc: >-
+    Disease data from Mondo Disease Ontology.
+  keys:
+    - id
+    - label
+    - definition
+    - doid
+    - umls
+    - efo
+    - icd9
+    - icd10
+    - mesh
+SemmedTriple:
+  id: id
+  name: id
+  doc: >-
+    Semantic triplet (subject - predicate - object)
+    from SemMedDB.
+  keys:
+    - id
+    - predicate
+    - subject_name
+    - subject_type
+    - subject_id
+    - object_name
+    - object_type
+    - object_id
+    - count
+SemmedTerm:
+  id: id
+  name: name
+  doc: >-
+   Name of the biomedical term from SemMedDB.
+  keys:
+    - name
+    - count
+    - id
+    - type
