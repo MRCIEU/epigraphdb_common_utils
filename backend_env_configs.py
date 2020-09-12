@@ -4,6 +4,14 @@ Environment variables used in the python fastapi backend of EpiGraphDB web app
 from .env_utils import EnvConfigs, EnvVar
 
 env_configs = EnvConfigs(
+    # backend
+    use_cache=EnvVar(
+        "USE_CACHE",
+        default=True,
+        desc="""
+        Enable caching.
+        """,
+    ),
     # paired private API
     api_url=EnvVar(
         "API_URL",
