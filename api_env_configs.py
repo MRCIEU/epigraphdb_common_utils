@@ -7,7 +7,6 @@ env_configs = EnvConfigs(
     api_private_access=EnvVar(
         "API_PRIVATE_ACCESS",
         default=True,
-        type=bool,
         desc="""
         If True, will enable several endpoints that are restricted to
         an internal / private API instance.

@@ -15,7 +15,6 @@ class EnvVar:
         name: str,
         default: Optional[Any] = None,
         secret: bool = False,
-        type=str,
         desc: Optional[str] = None,
         environs_env: environs.Env = env,
     ):
@@ -25,7 +24,6 @@ class EnvVar:
         - default: Default value
         - secret: If True, when this env var is displayed / printed, it will
                   only show a small proportion (first 3 characters)
-        - type: Object type of the env var to be coerced into,
           default to str
         - desc: Description.
         - environs_env: An instantiated environs.Env object from which the
@@ -43,10 +41,15 @@ class EnvVar:
         # Process values
         self.use_default: bool = True
         self.value = self.default
-        value_init = self.env(self.name, self.default)
-        if value_init is not None and type(value_init) != self.default:
-            self.value = type(value_init)
+        if type(default) == bool:
+            value_init = self.env.bool(self.name, self.default)
+        elif type(default) == int:
+            value_init = self.env.int(self.name, self.default)
+        else:
+            value_init = self.env(self.name, self.default)
+        if value_init is not None:
             self.use_default = False
+            self.value = value_init
         self.value_display = str(self.value)
         if self.secret and value_init is not None:
             self.value_display = str(self.value)[:3] + "******"

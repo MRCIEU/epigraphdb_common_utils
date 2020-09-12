@@ -60,7 +60,6 @@ env_configs = EnvConfigs(
     graph_readonly=EnvVar(
         "GRAPH_READONLY",
         default=True,
-        type=bool,
         desc="""
         graph: Override to enable writability.
         """,
