@@ -3,7 +3,7 @@ Meta:
   name: null
   doc: >-
     Metadata information of EpiGraphDB Graph.
-  keys:
+  properties:
     - build_date:
         doc: >-
           Date of the database build.
@@ -15,7 +15,7 @@ Drug:
   name: label
   doc: >-
     Drug data from Open Targets.
-  keys:
+  properties:
     - label:
         doc: >-
           Label of the drug
@@ -30,7 +30,7 @@ Efo:
   name: value
   doc: >-
     Experimental Factor Ontology.
-  keys:
+  properties:
     - id
     - value
     - type
@@ -39,7 +39,7 @@ Event:
   name: name
   doc: >-
     Event
-  keys:
+  properties:
     - name
     - in_disease
     - reactome_id
@@ -50,7 +50,7 @@ Gene:
     Gene data from BioMart (build 37).
 
     Gene druggability data comes from Finan et al (2017).
-  keys:
+  properties:
     - chr
     - type
     - name:
@@ -77,7 +77,7 @@ Tissue:
   name: tissue
   doc: >-
     Tissue specific gene expression from GTEx
-  keys:
+  properties:
     - tissue
 Gwas:
   id: id
@@ -87,7 +87,7 @@ Gwas:
     IEU OpenGWAS Database.
 
     https://gwas.mrcieu.ac.uk
-  keys:
+  properties:
     - note
     - access
     - mr
@@ -117,7 +117,7 @@ Literature:
   name: pubmed_id
   doc: >-
     PubMed literature data as available from SemMedDB.
-  keys:
+  properties:
     - pubmed_id
     - issn
     - dp
@@ -128,7 +128,7 @@ Pathway:
   name: name
   doc: >-
     Biological pathway data from Reactome.
-  keys:
+  properties:
     - name:
         doc: >-
           Name of the pathway.
@@ -141,7 +141,7 @@ Protein:
   name: uniprot_id
   doc: >-
     Protein data from BioMart web service (build 37).
-  keys:
+  properties:
     - uniprot_id:
         doc: >-
           UniProt Identifier.
@@ -150,7 +150,7 @@ Disease:
   name: label
   doc: >-
     Disease data from Mondo Disease Ontology.
-  keys:
+  properties:
     - id
     - label
     - definition
@@ -166,7 +166,7 @@ SemmedTriple:
   doc: >-
     Semantic triplet (subject - predicate - object)
     from SemMedDB.
-  keys:
+  properties:
     - id
     - predicate
     - subject_name
@@ -181,8 +181,14 @@ SemmedTerm:
   name: name
   doc: >-
    Name of the biomedical term from SemMedDB.
-  keys:
+  properties:
     - name
     - count
     - id
     - type
+Variant:
+  id: name
+  name: name
+  doc: null
+  properties:
+    - name
