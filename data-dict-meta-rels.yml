@@ -230,13 +230,27 @@ PRS:
 
     Results from PRS Atlas.
   properties:
-    - nsnps
-    - model
-    - beta
-    - se
-    - p
-    - r2
-    - n
+    - nsnps:
+        doc: >-
+          Number of SNPs
+    - model:
+        doc: >-
+          Name of the model used, e.g. lm, glm, etc.
+    - beta:
+        doc: >-
+          Effect size
+    - se:
+        doc: >-
+          Standard error
+    - p:
+        doc: >-
+          P-value
+    - r2:
+        doc: >-
+          R<sup>2</sup> metric
+    - n:
+        doc: >-
+          Sample size
 SEM_GENE:
   source: SemmedTerm
   target: Gene
