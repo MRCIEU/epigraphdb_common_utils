@@ -31,15 +31,15 @@ Efo:
   doc: >-
     Experimental Factor Ontology.
   properties:
-    - id
-      doc: >-
-        EFO URL and identifier
-    - value
-      doc: >-
-        Text description (EFO term)
-    - type
-      doc: >-
-        EFO type
+    - id:
+        doc: >-
+          EFO URL and identifier
+    - value:
+        doc: >-
+          Text description (EFO term)
+    - type:
+        doc: >-
+          EFO type
 Event:
   id: reactome_id
   name: name
@@ -57,10 +57,10 @@ Gene:
 
     Gene druggability data comes from Finan et al (2017).
   properties:
-    - chr
+    - chr:
         doc: >-
           Chromosome
-    - type
+    - type:
         doc: >-
           Gene type, e.g. protein_coding, pseudogene
     - name:
@@ -74,16 +74,16 @@ Gene:
           Ensemble identifier of the gene.
 
           Used as the identifier of EpiGraphDB Gene.
-    - start
+    - start:
         doc: >-
           Start position on chromosome
-    - end
+    - end:
         doc: >-
           End position on chromosome
-    - description
+    - description:
         doc: >-
           Text description of gene
-    - reactome_id
+    - reactome_id:
         doc: >-
           Identifier for gene in Reactome database
     - adme_gene
