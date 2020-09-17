@@ -64,12 +64,53 @@ def get_property_docs(
         return res
 
 
+def sanitise_meta_nodes_dict(meta_nodes_dict, property_docs):
+    """Sanitise data dictionary for proper formatting
+    """
+
+    def _render(key, entity):
+        res = {
+            "id": entity["id"],
+            "name": entity["name"],
+            "doc": entity["doc"],
+            "properties": property_docs[key],
+        }
+        return res
+
+    res = {key: _render(key, value) for key, value in meta_nodes_dict.items()}
+    return res
+
+
+def sanitise_meta_rels_dict(meta_rels_dict, property_docs):
+    """Sanitise data dictionary for proper formatting
+    """
+
+    def _render(key, entity):
+        res = {
+            "source": entity["source"],
+            "target": entity["target"],
+            "doc": entity["doc"],
+            "properties": property_docs[key],
+        }
+        return res
+
+    res = {key: _render(key, value) for key, value in meta_rels_dict.items()}
+    return res
+
+
+# For displaying property docs at data table
 meta_nodes_property_docs = {
     key: get_property_docs(value["properties"])
     for key, value in meta_nodes_dict.items()
 }
-
 meta_rels_property_docs = {
     key: get_property_docs(value["properties"])
     for key, value in meta_rels_dict.items()
 }
+# For displaying schema docs at docs site
+meta_nodes_dict_sanitised = sanitise_meta_nodes_dict(
+    meta_nodes_dict, meta_nodes_property_docs
+)
+meta_rels_dict_sanitised = sanitise_meta_rels_dict(
+    meta_rels_dict, meta_rels_property_docs
+)
