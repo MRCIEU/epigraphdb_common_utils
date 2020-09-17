@@ -96,7 +96,9 @@ Tissue:
   doc: >-
     Tissue specific gene expression from GTEx
   properties:
-    - tissue
+    - tissue:
+        doc: >-
+          Tissue type
 Gwas:
   id: id
   name: trait
@@ -106,41 +108,87 @@ Gwas:
 
     https://gwas.mrcieu.ac.uk
   properties:
-    - note
-    - access
-    - mr
-    - year
-    - author
-    - consortium
-    - sex
-    - pmid
-    - priority
-    - population
-    - unit
-    - nsnp
-    - sample_size
+    - note:
+        doc: >-
+          Extra information
+    - access:
+        doc: >-
+          Access information
+    - mr:
+        doc: >-
+          Suitability of GWAS for Mendelian Randomization
+    - year:
+        doc: >-
+          Year of publication/creation
+    - author:
+        doc: >-
+          First author of GWAS
+    - consortium:
+        doc: >-
+          GWAS consortium name, if applicable
+    - sex:
+        doc: >-
+          Males/Females
+    - pmid:
+        doc: >-
+          PubMed identifier, where available
+    - priority:
+        doc: >-
+          Obsolete
+    - population:
+        doc: >-
+          Geographical origins of the samples included in the study
+    - unit:
+        doc: >-
+          How to interpret a 1-unit change in the phenotype? e.g. log odds ratio, mmol/L, SD units
+    - nsnp:
+        doc: >-
+          Number of variants in results file
+    - sample_size:
+        doc: >-
+          Sample size of GWAS
     - trait:
         doc: >-
-          Name of the phenotypic trait
+          Description of measured trait
     - id:
         doc: >-
           OpenGWAS identifier
-    - category
-    - subcategory
-    - ncase
-    - ncontrol
-    - sd
+    - category:
+        doc: >-
+          Binary disease phenotype or a non-disease phenotype
+    - subcategory:
+        doc: >-
+          Further categorisaation
+    - ncase:
+        doc: >-
+          Number of cases
+    - ncontrol:
+        doc: >-
+          Number of controls
+    - sd:
+        doc: >-
+          Standard deviation of the phenotype analysed
 Literature:
   id: pubmed_id
   name: pubmed_id
   doc: >-
     PubMed literature data as available from SemMedDB.
   properties:
-    - pubmed_id
-    - issn
-    - dp
-    - year
-    - edat
+    - pubmed_id:
+        doc: >-
+          The PubMed identifier
+    - issn:
+        doc: >-
+          ISSN code of journal
+    - dp:
+        doc: >-
+          Date published
+    - year:
+        doc: >-
+          Year published
+    - edat:
+        doc: >-
+          Entrez Date is the date the citation was added to PubMed
 Pathway:
   id: reactome_id
   name: name
