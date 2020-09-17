@@ -32,8 +32,14 @@ Efo:
     Experimental Factor Ontology.
   properties:
     - id
+      doc: >-
+        EFO URL and identifier
     - value
+      doc: >-
+        Text description (EFO term)
     - type
+      doc: >-
+        EFO type
 Event:
   id: reactome_id
   name: name
@@ -52,7 +58,11 @@ Gene:
     Gene druggability data comes from Finan et al (2017).
   properties:
     - chr
+        doc: >-
+          Chromosome
     - type
+        doc: >-
+          Gene type, e.g. protein_coding, pseudogene
     - name:
         doc: >-
           HGNC name of the gene.
@@ -65,9 +75,17 @@ Gene:
 
           Used as the identifier of EpiGraphDB Gene.
     - start
+        doc: >-
+          Start position on chromosome
     - end
+        doc: >-
+          End position on chromosome
     - description
+        doc: >-
+          Text description of gene
     - reactome_id
+        doc: >-
+          Identifier for gene in Reactome database
     - adme_gene
     - small_mol_druggable
     - bio_druggable
