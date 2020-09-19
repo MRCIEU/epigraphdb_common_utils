@@ -1,20 +1,26 @@
-Meta:
-  id: null
-  name: null
+# -*- mode: yaml -*-
+Disease:
+  id: id
+  name: label
   doc: >-
-    Metadata information of EpiGraphDB Graph.
+    Disease data from
+    [Mondo Disease Ontology](https://mondo.monarchinitiative.org/).
   properties:
-    - build_date:
-        doc: >-
-          Date of the database build.
-    - graph_version:
-        doc: >-
-          Version of the database build.
+    - id
+    - label
+    - definition
+    - doid
+    - umls
+    - efo
+    - icd9
+    - icd10
+    - mesh
+
 Drug:
   id: label
   name: label
   doc: >-
-    Drug data from Open Targets.
+    Drug data from [Open Targets](https://www.opentargets.org/).
   properties:
     - label:
         doc: >-
@@ -29,7 +35,7 @@ Efo:
   id: id
   name: value
   doc: >-
-    Experimental Factor Ontology.
+    Experimental Factor Ontology ([EFO](https://www.ebi.ac.uk/efo/p)).
   properties:
     - id:
         doc: >-
@@ -40,22 +46,24 @@ Efo:
     - type:
         doc: >-
           EFO type
+
 Event:
   id: reactome_id
   name: name
-  doc: >-
-    Event
+  doc: null
   properties:
     - name
     - in_disease
     - reactome_id
+
 Gene:
   id: ensembl_id
   name: name
   doc: >-
-    Gene data from BioMart (build 37).
+    Gene data from [BioMart (build 37)](http://www.biomart.org/).
 
-    Gene druggability data comes from Finan et al (2017).
+    Gene druggability data comes from
+    [Finan et al (2017)](https://stm.sciencemag.org/content/9/383/eaag1166).
   properties:
     - chr:
         doc: >-
@@ -72,8 +80,6 @@ Gene:
     - ensembl_id:
         doc: >-
           Ensemble identifier of the gene.
-
-          Used as the identifier of EpiGraphDB Gene.
     - start:
         doc: >-
           Start position on chromosome
@@ -86,27 +92,48 @@ Gene:
     - reactome_id:
         doc: >-
           Identifier for gene in Reactome database
-    - adme_gene
-    - small_mol_druggable
-    - bio_druggable
-    - druggability_tier
+    - adme_gene:
+        doc: >-
+          Is the protein product of the gene involved in
+          absorption, distribution, metabolism, and excretion
+          (ADME) of a compound.
+
+          Evidence from Finan et al.(2017).
+    - small_mol_druggable:
+        doc: >-
+          Is the protein product of the `(Gene)` targeted,
+          or predicted to be targeted, by a small molecule.
+
+          Evidence from Finan et al.(2017).
+    - bio_druggable:
+        doc: >-
+          Is the protein product of the `(Gene)` targeted,
+          or predicted to be targeted, by a biotherapeutic.
+
+          Evidence from Finan et al.(2017).
+    - druggability_tier:
+        doc: >-
+          The priority tier for the druggable `(Gene)`,
+          e.g. "Tier 1", "Tier 2", "Tier 3A", "Tier 3B".
+
+          Evidence from Finan et al.(2017).
+
 Tissue:
   id: tissue
   name: tissue
   doc: >-
-    Tissue specific gene expression from GTEx
+    Tissue specific gene expression from [GTEx](https://gtexportal.org/home/).
   properties:
     - tissue:
         doc: >-
           Tissue type
+
 Gwas:
   id: id
   name: trait
   doc: >-
     Genome Wide Association Studies metadata from
-    IEU OpenGWAS Database.
-
-    https://gwas.mrcieu.ac.uk
+    [IEU OpenGWAS Database](https://gwas.mrcieu.ac.uk).
   properties:
     - note:
         doc: >-
@@ -168,6 +195,7 @@ Gwas:
     - sd:
         doc: >-
           Standard deviation of the phenotype analysed
+
 Literature:
   id: pubmed_id
   name: pubmed_id
@@ -189,6 +217,7 @@ Literature:
     - edat:
         doc: >-
           Entrez Date is the date the citation was added to PubMed
+
 Pathway:
   id: reactome_id
   name: name
@@ -202,59 +231,80 @@ Pathway:
     - reactome_id:
         doc: >-
           Reactome identifier of the pathway.
+
 Protein:
   id: uniprot_id
   name: uniprot_id
   doc: >-
-    Protein data from BioMart web service (build 37).
+    Protein data from [BioMart (build 37)](http://www.biomart.org/).
   properties:
     - uniprot_id:
         doc: >-
           UniProt Identifier.
-Disease:
-  id: id
-  name: label
-  doc: >-
-    Disease data from Mondo Disease Ontology.
-  properties:
-    - id
-    - label
-    - definition
-    - doid
-    - umls
-    - efo
-    - icd9
-    - icd10
-    - mesh
+
 SemmedTriple:
   id: id
   name: id
   doc: >-
     Semantic triplet (subject - predicate - object)
-    from SemMedDB.
+    from [SemMedDB](https://skr3.nlm.nih.gov/SemMedDB/).
   properties:
-    - id
-    - predicate
-    - subject_name
+    - id:
+        doc: >-
+          The complete semantic triplet `{subject}:{PREDICATE}:{object}`.
+    - predicate:
+        doc: >-
+          Predicate of the semantic triplet.
+    - subject_name:
+        doc: >-
+          Name of the subject.
     - subject_type
-    - subject_id
-    - object_name
+    - subject_id:
+        doc: >-
+          Subject ID.
+    - object_name:
+        doc: >-
+          Name of the object.
     - object_type
-    - object_id
+    - object_id:
+        doc: >-
+          Object ID.
     - count
+
 SemmedTerm:
   id: id
   name: name
   doc: >-
-   Name of the biomedical term from SemMedDB.
+   Biomedical term from [SemMedDB](https://skr3.nlm.nih.gov/SemMedDB/).
   properties:
-    - name
+    - name:
+        doc: >-
+          Name of the SemMed term.
     - count
-    - id
+    - id:
+        doc: >-
+          SemMed term ID.
     - type
+
 Variant:
   id: name
   name: name
-  doc: null
+  doc: >-
+    Genetic variant, e.g. SNPs.
   properties:
-    - name
+    - name:
+        doc: >-
+          rsID of the SNP.
+
+Meta:
+  id: null
+  name: null
+  doc: >-
+    Metadata information of EpiGraphDB Graph.
+  properties:
+    - build_date:
+        doc: >-
+          Date of the database build.
+    - graph_version:
+        doc: >-
+          Version of the database build.
