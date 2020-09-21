@@ -8,31 +8,31 @@ Disease:
   properties:
     - id:
         doc: >-
-          IRI for this Mondo entry (incorporates Mondo ID)
+          IRI for this Mondo entry (incorporates Mondo ID).
     - label:
         doc: >-
-          Text label of disease
+          Text label of disease.
     - definition:
         doc: >-
-          Expanded text description of disease
+          Expanded text description of disease.
     - doid:
         doc: >-
-          Disease ontology identifier (disease-ontology.org)
+          Disease ontology identifier (https://disease-ontology.org).
     - umls:
         doc: >-
-          Unified Medical Language System identifier (www.nlm.nih.gov/research/umls/)
+          Unified Medical Language System identifier (https://www.nlm.nih.gov/research/umls/)
     - efo:
         doc: >-
-          Experimental factor ontology identifier (www.ebi.ac.uk/efo/)
+          Experimental factor ontology identifier (https://www.ebi.ac.uk/efo/)
     - icd9:
         doc: >-
-          International classification of diseases ICD9 code
+          International classification of diseases ICD9 code.
     - icd10:
         doc: >-
-          International classification of diseases ICD10 code
+          International classification of diseases ICD10 code.
     - mesh:
         doc: >-
-          Medical Subject Headings (MeSH) identifier
+          Medical Subject Headings (MeSH) identifier.
 
 Drug:
   id: label
@@ -57,29 +57,29 @@ Efo:
   properties:
     - id:
         doc: >-
-          EFO URL and identifier
+          EFO URL and identifier.
     - value:
         doc: >-
-          Text description (EFO term)
+          Text description (EFO term).
     - type:
         doc: >-
-          EFO type
+          EFO type.
 
 Event:
   id: reactome_id
   name: name
   doc: >-
-    Events in Reactome (representing biological processes)
+    Events in Reactome (representing biological processes).
   properties:
     - name:
         doc: >-
-          Description of event
+          Description of event.
     - in_disease:
         doc: >-
-          Whether event occurs in disease (TRUE or FALSE)
+          Whether event occurs in disease (TRUE or FALSE).
     - reactome_id:
         doc: >-
-          Reactome ID for event
+          Reactome ID for event.
 
 Gene:
   id: ensembl_id
@@ -151,7 +151,7 @@ Tissue:
   properties:
     - tissue:
         doc: >-
-          Text description of tissue type
+          Text description of tissue type.
 
 Gwas:
   id: id
@@ -162,64 +162,64 @@ Gwas:
   properties:
     - note:
         doc: >-
-          Extra information
+          Extra information.
     - access:
         doc: >-
-          Access information (public or other)
+          Access information (public or other).
     - mr:
         doc: >-
-          Suitability of GWAS for Mendelian randomization
+          Suitability of GWAS for Mendelian randomization.
     - year:
         doc: >-
-          Year of publication/creation
+          Year of publication/creation.
     - author:
         doc: >-
-          First author of GWAS
+          First author of GWAS.
     - consortium:
         doc: >-
-          GWAS consortium name, if applicable
+          GWAS consortium name, if applicable.
     - sex:
         doc: >-
-          Males/Females
+          Males/Females.
     - pmid:
         doc: >-
-          PubMed identifier, where available
+          PubMed identifier, where available.
     - priority:
         doc: >-
-          Obsolete
+          An obsolete field.
     - population:
         doc: >-
-          Geographical origins of the samples included in the study
+          Geographical origins of the samples included in the study.
     - unit:
         doc: >-
-          How to interpret a 1-unit change in the phenotype? e.g. log odds ratio, mmol/L, SD units
+          How to interpret a 1-unit change in the phenotype? e.g. log odds ratio, mmol/L, SD units.
     - nsnp:
         doc: >-
-          Number of variants in results file
+          Number of variants in results file.
     - sample_size:
         doc: >-
-          Sample size of GWAS
+          Sample size of GWAS.
     - trait:
         doc: >-
-          Description of measured trait
+          Description of measured trait.
     - id:
         doc: >-
-          IEU OpenGWAS identifier
+          IEU OpenGWAS identifier.
     - category:
         doc: >-
-          Binary disease phenotype or a non-disease phenotype
+          Binary disease phenotype or a non-disease phenotype.
     - subcategory:
         doc: >-
-          Further categorisation
+          Further categorisation.
     - ncase:
         doc: >-
-          Number of cases
+          Number of cases.
     - ncontrol:
         doc: >-
-          Number of controls
+          Number of controls.
     - sd:
         doc: >-
-          Standard deviation of the phenotype analysed
+          Standard deviation of the phenotype analysed.
 
 Literature:
   id: pubmed_id
@@ -229,19 +229,19 @@ Literature:
   properties:
     - pubmed_id:
         doc: >-
-          The PubMed identifier
+          The PubMed identifier.
     - issn:
         doc: >-
-          ISSN code of journal
+          ISSN code of journal.
     - dp:
         doc: >-
-          Date published
+          Date published.
     - year:
         doc: >-
-          Year published
+          Year published.
     - edat:
         doc: >-
-          Entrez Date is the date the citation was added to PubMed
+          Entrez Date is the date the citation was added to PubMed.
 
 Pathway:
   id: reactome_id
@@ -279,26 +279,28 @@ SemmedTriple:
           The complete semantic triplet `{subject}:{PREDICATE}:{object}`.
     - predicate:
         doc: >-
-          Predicate of the semantic triplet.
+          The string representation of each predicate (for example TREATS, PROCESS_OF).
     - subject_name:
         doc: >-
-          Name of the subject.
+          The preferred name of the subject of the predication.
     - subject_type:
         doc: >-
-          SEMTYPE (see mmtx.nlm.nih.gov/MMTx/semanticTypes.shtml)
+          The semantic type of the subject of the predication (see https://mmtx.nlm.nih.gov/MMTx/semanticTypes.shtml).
     - subject_id:
         doc: >-
-          Subject ID.
+          The Concept Unique Identifier (CUI) of the subject of the predication.
     - object_name:
         doc: >-
-          Name of the object.
+          The preferred name of the object of the predication.
     - object_type:
         doc: >-
-          SEMTYPE (see mmtx.nlm.nih.gov/MMTx/semanticTypes.shtml)
+          The semantic type of the object of the predication (see https://mmtx.nlm.nih.gov/MMTx/semanticTypes.shtml).
     - object_id:
         doc: >-
-          Object ID.
-    - count
+          The Concept Unique Identifier (CUI) of the object of the predication.
+    - count:
+        doc: >-
+          The total triple count .
 
 SemmedTerm:
   id: id
@@ -308,14 +310,16 @@ SemmedTerm:
   properties:
     - name:
         doc: >-
-          Name of the SemMed term.
-    - count
+          The preferred name of semantic term.
+    - count:
+        doc: >-
+          The total term count.
     - id:
         doc: >-
-          SemMed term ID.
+          The Concept Unique Identifier (CUI) of the term.
     - type:
         doc: >-
-          SEMTYPE (see mmtx.nlm.nih.gov/MMTx/semanticTypes.shtml)
+          The semantic type of term (see https://mmtx.nlm.nih.gov/MMTx/semanticTypes.shtml).
 
 Variant:
   id: name

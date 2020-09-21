@@ -9,34 +9,34 @@ BN_GEN_COR:
   properties:
     - rg:
         doc: >-
-          Genetic correlation (r_g)
+          Genetic correlation (r_g).
     - se:
         doc: >-
-          Standard error of rg
+          Standard error of rg.
     - z:
         doc: >-
-          z statistic for test of null hypothesis rg = 0
+          z statistic for test of null hypothesis rg = 0.
     - p:
         doc: >-
-          p-value for test of null hypothesis rg = 0
+          p-value for test of null hypothesis rg = 0.
     - h2_obs:
         doc: >-
-          observed scale heritability
+          observed scale heritability.
     - h2_obs_se:
         doc: >-
-          Standard error of h2_obs
+          Standard error of h2_obs.
     - h2_int:
         doc: >-
-          LD score regression intercept for single trait
+          LD score regression intercept for single trait.
     - h2_int_se:
         doc: >-
-          Standard error of h2_int
+          Standard error of h2_int.
     - gcov_int:
         doc: >-
-          LD score regression intercept (cross-trait)
+          LD score regression intercept (cross-trait).
     - gcov_int_se:
         doc: >-
-          Standard error of gcov_int
+          Standard error of gcov_int.
 
 CPIC:
   source: Drug
@@ -45,17 +45,17 @@ CPIC:
   properties:
     - pharmgkb_level_of_evidence:
         doc: >-
-          PharmGKB level of evidence (https://www.pharmgkb.org/page/clinAnnLevels)
+          PharmGKB level of evidence (https://www.pharmgkb.org/page/clinAnnLevels).
     - cpic_level:
         doc: >-
-          CPIC level of evidence (https://cpicpgx.org/prioritization/)
+          CPIC level of evidence (https://cpicpgx.org/prioritization/).
     - guideline:
         doc: >-
-          CPIC guideline for clinicians (cpicpgx.org/guidelines/)
+          CPIC guideline for clinicians (cpicpgx.org/guidelines/).
     - pgx_on_fda_label:
         doc: >-
           PharmGKB PGx level based on drug label
-          (www.pharmgkb.org/page/drugLabelLegend)
+          (www.pharmgkb.org/page/drugLabelLegend).
 
 EFO_CHILD_OF:
   source: Efo
@@ -77,7 +77,7 @@ EXPRESSED_IN:
   source: Gene
   target: Tissue
   doc: >-
-    The source Gene is expressed in the target Tissue in GTEx (gtexportal.org).
+    The source Gene is expressed in the target Tissue in GTEx (https://gtexportal.org).
   doc: null
   properties:
     - tpm:
@@ -87,13 +87,15 @@ EXPRESSED_IN:
 GENE_TO_LITERATURE:
   source: Gene
   target: Literature
-  doc: null
+  doc: >-
+    Association between `(Gene)` and `(Literature)`.
   properties: null
 
 GENE_TO_PROTEIN:
   source: Gene
   target: Protein
-  doc: null
+  doc: >-
+    Mapping between `(Gene)` and `(Protein)`.
   properties: null
 
 GWAS_NLP:
@@ -125,19 +127,34 @@ GWAS_NLP_EFO:
 GWAS_SEM:
   source: Gwas
   target: SemmedTriple
-  doc: null
+  doc: >-
+    Mapping between `(Gwas)` and `(SemmedTriple)`.
   properties:
-    - localCount
-    - localTotal
-    - globalCount
-    - globalTotal
-    - odds
-    - pval
+    - localCount:
+        doc: >-
+          Count of given triple for given search term.
+    - localTotal:
+        doc: >-
+          Count of all triples for given search term.
+    - globalCount:
+        doc: >-
+          Count of given triple in database.
+    - globalTotal:
+        doc: >-
+          Count of all triples in database.
+    - odds:
+        doc: >-
+          Odds ration from Fisher's Exact Test.
+    - pval:
+        doc: >-
+          P-value from Fisher's Exact Test.
 
 GWAS_TO_LIT:
   source: Gwas
   target: Literature
-  doc: null
+  doc: >-
+    Asscociation of the `(Gwas)` phenotype to
+    a `(Literature)` PubMed article.
   properties: null
 
 GWAS_TO_VARIANT:
@@ -157,57 +174,89 @@ INTACT_INTERACTS_WITH_GENE_GENE:
   source: Gene
   target: Gene
   doc: >-
-    Protein-protein interactions from IntAct (www.ebi.ac.uk/intact/).
+    `(Gene)`-`(Gene)` interactions from IntAct (www.ebi.ac.uk/intact/).
 
     Further details in IntAct reference manual
-    [Vectology](https://www.ebi.ac.uk/intact/resources/curation_manual)
+    (https://www.ebi.ac.uk/intact/resources/curation_manual)
   properties:
     - intact_confidence_score:
         doc: >-
-          IntAct confidence score
+          IntAct confidence score.
     - intact_detection_method:
         doc: >-
-          Method used to detect the interaction
+          Method used to detect the interaction.
     - intact_type:
         doc: >-
-          Type of interaction
+          Type of interaction.
     - intact_source
     - intact_identifier:
         doc: >-
-          IntAct identifier
+          IntAct identifier.
 
 INTACT_INTERACTS_WITH_GENE_PROTEIN:
-  source: Protein
-  target: Protein
-  doc: null
-  properties:
-    - intact_confidence_score
-    - intact_detection_method
-    - intact_type
-    - intact_source
-    - intact_identifier
-
-INTACT_INTERACTS_WITH_PROTEIN_PROTEIN:
   source: Gene
   target: Protein
-  doc: null
+  doc: >-
+    `(Gene)`-`(Gene)` interactions from IntAct (www.ebi.ac.uk/intact/).
+
+    Further details in IntAct reference manual
+    (https://www.ebi.ac.uk/intact/resources/curation_manual)
   properties:
-    - intact_confidence_score
-    - intact_detection_method
-    - intact_type
+    - intact_confidence_score:
+        doc: >-
+          IntAct confidence score.
+    - intact_detection_method:
+        doc: >-
+          Method used to detect the interaction.
+    - intact_type:
+        doc: >-
+          Type of interaction.
     - intact_source
-    - intact_identifier
+    - intact_identifier:
+        doc: >-
+          IntAct identifier.
+
+INTACT_INTERACTS_WITH_PROTEIN_PROTEIN:
+  source: Protein
+  target: Protein
+  doc: >-
+    `(Protein)`-`(Protein)` interactions from IntAct (www.ebi.ac.uk/intact/).
+
+    Further details in IntAct reference manual
+    (https://www.ebi.ac.uk/intact/resources/curation_manual)
+  properties:
+    - intact_confidence_score:
+        doc: >-
+          IntAct confidence score.
+    - intact_detection_method:
+        doc: >-
+          Method used to detect the interaction.
+    - intact_type:
+        doc: >-
+          Type of interaction.
+    - intact_source
+    - intact_identifier:
+        doc: >-
+          IntAct identifier.
 
 INTACT_NOT_INTERACTS_WITH:
   source: Protein
   target: Protein
   doc: null
   properties:
-    - intact_confidence_score
-    - intact_detection_method
-    - intact_type
+    - intact_confidence_score:
+        doc: >-
+          IntAct confidence score.
+    - intact_detection_method:
+        doc: >-
+          Method used to detect the interaction.
+    - intact_type:
+        doc: >-
+          Type of interaction.
     - intact_source
-    - intact_identifier
+    - intact_identifier:
+        doc: >-
+          IntAct identifier.
 
 METAMAP_LITE:
   source: Gwas
@@ -215,8 +264,11 @@ METAMAP_LITE:
   doc: >-
     Mapping between Gwas and SemmedTerm via MetaMap Lite.
   properties:
-    - mmi_score
-    - mesh
+    - mmi_score:
+      doc: >-
+        MetaMap Indexing (MMI) score with a maximum score of 1000.00.
+        The higher the score, the greater the relevance of the UMLS
+        concept according to the MMI algorithm.
 
 MONDO_MAP_EFO:
   source: Disease
@@ -359,25 +411,25 @@ PRS:
   properties:
     - nsnps:
         doc: >-
-          Number of SNPs
+          Number of SNPs.
     - model:
         doc: >-
           Name of the model used, e.g. lm, glm, etc.
     - beta:
         doc: >-
-          Effect size
+          Effect size.
     - se:
         doc: >-
-          Standard error
+          Standard error.
     - p:
         doc: >-
-          P-value
+          P-value.
     - r2:
         doc: >-
-          R<sup>2</sup> metric
+          R<sup>2</sup> metric.
     - n:
         doc: >-
-          Sample size
+          Sample size.
 
 SEM_GENE:
   source: SemmedTerm
@@ -396,8 +448,12 @@ SEM_PREDICATE:
   target: SemmedTerm
   doc: null
   properties:
-    - predicate
-    - count
+    - predicate:
+      doc: >-
+        The string representation of each predicate (for example TREATS, PROCESS_OF)
+    - count:
+      doc: >-
+        The total predicate count
 
 SEM_SUB:
   source: SemmedTriple
@@ -414,7 +470,8 @@ SEM_TO_LIT:
 STRING_INTERACT_WITH:
   source: Protein
   target: Protein
-  doc: null
+  doc: >-
+    `(Protein)`-`(Protein)` interactions from STRING (https://string-db.org).
   properties:
     - score
 
@@ -425,29 +482,52 @@ TOPHITS:
   properties:
     - beta:
         doc: >-
-          Effect size
+          Effect size.
     - pval:
         doc: >-
-          P-Value
+          P-Value.
 
 VARIANT_TO_GENE:
   source: Variant
   target: Gene
-  # TODO VEP
   doc: null
   properties:
-    - location
-    - allele
-    - feature
-    - feature_type
-    - consequence
-    - cdna_position
-    - cds_position
-    - protein_position
-    - amino_acids
-    - codons
-    - existing_variation
-    - extra
+    - location:
+        doc: >-
+          In standard coordinate format (chr:start or chr:start-end).
+    - allele:
+        doc: >-
+          The variant allele used to calculate the consequence.
+    - feature:
+        doc: >-
+          Ensembl stable ID of feature.
+    - feature_type:
+        doc: >-
+          Type of feature. Currently one of Transcript, RegulatoryFeature, MotifFeature.
+    - consequence:
+        doc: >-
+          Consequence type of this variant (see https://www.ensembl.org/info/genome/variation/prediction/predicted_data.html#consequences).
+    - cdna_position:
+        doc: >-
+          Relative position of base pair in cDNA sequence.
+    - cds_position:
+        doc: >-
+          Relative position of base pair in coding sequence.
+    - protein_position:
+        doc: >-
+          Relative position of amino acid in protein.
+    - amino_acids:
+        doc: >-
+          Only given if the variant affects the protein-coding sequence.
+    - codons:
+        doc: >-
+          The alternative codons with the variant base in upper case.
+    - existing_variation:
+        doc: >-
+          Known identifier of existing variant.
+    - extra:
+        doc: >-
+          This column contains extra information as key=value pairs separated by ";" (see https://www.ensembl.org/info/docs/tools/vep/vep_formats.html#other_fields).
 
 XQTL_MULTI_SNP_MR:
   source: Gene
