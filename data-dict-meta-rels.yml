@@ -7,26 +7,55 @@ BN_GEN_COR:
     ["UKBB Genetic Correlation"](https://ukbb-rg.hail.is/)
     project by Neale Lab.
   properties:
-    - rg
-    - se
-    - z
-    - p
-    - h2_obs
-    - h2_obs_se
-    - h2_int
-    - h2_int_se
-    - gcov_int
-    - gcov_int_se
+    - rg:
+        doc: >-
+          Genetic correlation (r_g)
+    - se:
+        doc: >-
+          Standard error of rg
+    - z:
+        doc: >-
+          z statistic for test of null hypothesis rg = 0
+    - p:
+        doc: >-
+          p-value for test of null hypothesis rg = 0
+    - h2_obs:
+        doc: >-
+          observed scale heritability
+    - h2_obs_se:
+        doc: >-
+          Standard error of h2_obs
+    - h2_int:
+        doc: >-
+          LD score regression intercept for single trait
+    - h2_int_se:
+        doc: >-
+          Standard error of h2_int
+    - gcov_int:
+        doc: >-
+          LD score regression intercept (cross-trait)
+    - gcov_int_se:
+        doc: >-
+          Standard error of gcov_int
 
 CPIC:
   source: Drug
   target: Gene
   doc: null
   properties:
-    - pharmgkb_level_of_evidence
-    - cpic_level
-    - guideline
-    - pgx_on_fda_label
+    - pharmgkb_level_of_evidence:
+        doc: >-
+          PharmGKB level of evidence (https://www.pharmgkb.org/page/clinAnnLevels)
+    - cpic_level:
+        doc: >-
+          CPIC level of evidence (https://cpicpgx.org/prioritization/)
+    - guideline:
+        doc: >-
+          CPIC guideline for clinicians (cpicpgx.org/guidelines/)
+    - pgx_on_fda_label:
+        doc: >-
+          PharmGKB PGx level based on drug label
+          (www.pharmgkb.org/page/drugLabelLegend)
 
 EFO_CHILD_OF:
   source: Efo
@@ -39,15 +68,21 @@ EFO_CHILD_OF:
 EVENT_IN_PATHWAY:
   source: Pathway
   target: Event
+  doc: >-
+    The target `(Reactome)` event is in the source `(Reactome)` pathway.
   doc: null
   properties: null
 
 EXPRESSED_IN:
   source: Gene
   target: Tissue
+  doc: >-
+    The source Gene is expressed in the target Tissue in GTEx (gtexportal.org).
   doc: null
   properties:
-    - tpm
+    - tpm:
+        doc: >-
+          Gene expression level in transcripts per million (TPM).
 
 GENE_TO_LITERATURE:
   source: Gene
@@ -121,13 +156,25 @@ GWAS_TO_VARIANT:
 INTACT_INTERACTS_WITH_GENE_GENE:
   source: Gene
   target: Gene
-  doc: null
+  doc: >-
+    Protein-protein interactions from IntAct (www.ebi.ac.uk/intact/).
+
+    Further details in IntAct reference manual
+    [Vectology](https://www.ebi.ac.uk/intact/resources/curation_manual)
   properties:
-    - intact_confidence_score
-    - intact_detection_method
-    - intact_type
+    - intact_confidence_score:
+        doc: >-
+          IntAct confidence score
+    - intact_detection_method:
+        doc: >-
+          Method used to detect the interaction
+    - intact_type:
+        doc: >-
+          Type of interaction
     - intact_source
-    - intact_identifier
+    - intact_identifier:
+        doc: >-
+          IntAct identifier
 
 INTACT_INTERACTS_WITH_GENE_PROTEIN:
   source: Protein

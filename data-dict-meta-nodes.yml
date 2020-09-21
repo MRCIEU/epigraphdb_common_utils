@@ -6,15 +6,33 @@ Disease:
     Disease data from
     [Mondo Disease Ontology](https://mondo.monarchinitiative.org/).
   properties:
-    - id
-    - label
-    - definition
-    - doid
-    - umls
-    - efo
-    - icd9
-    - icd10
-    - mesh
+    - id:
+        doc: >-
+          IRI for this Mondo entry (incorporates Mondo ID)
+    - label:
+        doc: >-
+          Text label of disease
+    - definition:
+        doc: >-
+          Expanded text description of disease
+    - doid:
+        doc: >-
+          Disease ontology identifier (disease-ontology.org)
+    - umls:
+        doc: >-
+          Unified Medical Language System identifier (www.nlm.nih.gov/research/umls/)
+    - efo:
+        doc: >-
+          Experimental factor ontology identifier (www.ebi.ac.uk/efo/)
+    - icd9:
+        doc: >-
+          International classification of diseases ICD9 code
+    - icd10:
+        doc: >-
+          International classification of diseases ICD10 code
+    - mesh:
+        doc: >-
+          Medical Subject Headings (MeSH) identifier
 
 Drug:
   id: label
@@ -30,7 +48,7 @@ Drug:
           Type of the molecule, e.g. Antibody, Protein, Enzyme, etc.
     - chembl_uri:
         doc: >-
-          URI from chembl.
+          [ChEMBL](https://www.ebi.ac.uk/chembl/) Uniform Resource Identifier.
 Efo:
   id: id
   name: value
@@ -50,11 +68,18 @@ Efo:
 Event:
   id: reactome_id
   name: name
-  doc: null
+  doc: >-
+    Events in Reactome (representing biological processes)
   properties:
-    - name
-    - in_disease
-    - reactome_id
+    - name:
+        doc: >-
+          Description of event
+    - in_disease:
+        doc: >-
+          Whether event occurs in disease (TRUE or FALSE)
+    - reactome_id:
+        doc: >-
+          Reactome ID for event
 
 Gene:
   id: ensembl_id
@@ -79,7 +104,7 @@ Gene:
           Source of the gene.
     - ensembl_id:
         doc: >-
-          Ensemble identifier of the gene.
+          Ensembl identifier of the gene.
     - start:
         doc: >-
           Start position on chromosome
@@ -126,7 +151,7 @@ Tissue:
   properties:
     - tissue:
         doc: >-
-          Tissue type
+          Text description of tissue type
 
 Gwas:
   id: id
@@ -140,10 +165,10 @@ Gwas:
           Extra information
     - access:
         doc: >-
-          Access information
+          Access information (public or other)
     - mr:
         doc: >-
-          Suitability of GWAS for Mendelian Randomization
+          Suitability of GWAS for Mendelian randomization
     - year:
         doc: >-
           Year of publication/creation
@@ -179,13 +204,13 @@ Gwas:
           Description of measured trait
     - id:
         doc: >-
-          OpenGWAS identifier
+          IEU OpenGWAS identifier
     - category:
         doc: >-
           Binary disease phenotype or a non-disease phenotype
     - subcategory:
         doc: >-
-          Further categorisaation
+          Further categorisation
     - ncase:
         doc: >-
           Number of cases
@@ -258,14 +283,18 @@ SemmedTriple:
     - subject_name:
         doc: >-
           Name of the subject.
-    - subject_type
+    - subject_type:
+        doc: >-
+          SEMTYPE (see mmtx.nlm.nih.gov/MMTx/semanticTypes.shtml)
     - subject_id:
         doc: >-
           Subject ID.
     - object_name:
         doc: >-
           Name of the object.
-    - object_type
+    - object_type:
+        doc: >-
+          SEMTYPE (see mmtx.nlm.nih.gov/MMTx/semanticTypes.shtml)
     - object_id:
         doc: >-
           Object ID.
@@ -284,7 +313,9 @@ SemmedTerm:
     - id:
         doc: >-
           SemMed term ID.
-    - type
+    - type:
+        doc: >-
+          SEMTYPE (see mmtx.nlm.nih.gov/MMTx/semanticTypes.shtml)
 
 Variant:
   id: name
