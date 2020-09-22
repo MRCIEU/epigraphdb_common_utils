@@ -78,7 +78,6 @@ EXPRESSED_IN:
   target: Tissue
   doc: >-
     The source Gene is expressed in the target Tissue in GTEx (https://gtexportal.org).
-  doc: null
   properties:
     - tpm:
         doc: >-
@@ -265,10 +264,10 @@ METAMAP_LITE:
     Mapping between Gwas and SemmedTerm via MetaMap Lite.
   properties:
     - mmi_score:
-      doc: >-
-        MetaMap Indexing (MMI) score with a maximum score of 1000.00.
-        The higher the score, the greater the relevance of the UMLS
-        concept according to the MMI algorithm.
+        doc: >-
+          MetaMap Indexing (MMI) score with a maximum score of 1000.00.
+          The higher the score, the greater the relevance of the UMLS
+          concept according to the MMI algorithm.
 
 MONDO_MAP_EFO:
   source: Disease
@@ -449,11 +448,11 @@ SEM_PREDICATE:
   doc: null
   properties:
     - predicate:
-      doc: >-
-        The string representation of each predicate (for example TREATS, PROCESS_OF)
+        doc: >-
+          The string representation of each predicate (for example TREATS, PROCESS_OF)
     - count:
-      doc: >-
-        The total predicate count
+        doc: >-
+          The total predicate count
 
 SEM_SUB:
   source: SemmedTriple
