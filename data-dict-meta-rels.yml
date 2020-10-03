@@ -41,7 +41,8 @@ BN_GEN_COR:
 CPIC:
   source: Drug
   target: Gene
-  doc: null
+  doc: >-
+    Evidence of drug to target gene by CPIC.
   properties:
     - pharmgkb_level_of_evidence:
         doc: >-
@@ -69,8 +70,7 @@ EVENT_IN_PATHWAY:
   source: Pathway
   target: Event
   doc: >-
-    The target `(Reactome)` event is in the source `(Reactome)` pathway.
-  doc: null
+    The target Reactome `(Event)` is in the source Reactome `(Pathway)`.
   properties: null
 
 EXPRESSED_IN:
@@ -152,22 +152,39 @@ GWAS_TO_LIT:
   source: Gwas
   target: Literature
   doc: >-
-    Asscociation of the `(Gwas)` phenotype to
+    Association of the `(Gwas)` phenotype to
     a `(Literature)` PubMed article.
   properties: null
 
 GWAS_TO_VARIANT:
   source: Gwas
   target: Variant
-  doc: null
+  doc: >-
+    Association of the `(Gwas)` phenotype to a `(Variant)`.
+
+    Instrument data from MR-EvE ([Hemani et al., 2017](https://www.biorxiv.org/content/10.1101/173682v2)).
   properties:
-    - beta
-    - se
-    - pval
-    - eaf
-    - samplesize
-    - ncase
-    - ncontrol
+    - beta:
+        doc: >-
+          Effect size.
+    - se:
+        doc: >-
+          Standard error.
+    - pval:
+        doc: >-
+          P-value.
+    - eaf:
+        doc: >-
+          Effect allele frequency.
+    - samplesize:
+        doc: >-
+          Sample size.
+    - ncase:
+        doc: >-
+          Number of cases.
+    - ncontrol:
+        doc: >-
+          Number of controls.
 
 INTACT_INTERACTS_WITH_GENE_GENE:
   source: Gene
@@ -176,7 +193,7 @@ INTACT_INTERACTS_WITH_GENE_GENE:
     `(Gene)`-`(Gene)` interactions from IntAct (www.ebi.ac.uk/intact/).
 
     Further details in IntAct reference manual
-    (https://www.ebi.ac.uk/intact/resources/curation_manual)
+    (https://www.ebi.ac.uk/intact/resources/curation_manual).
   properties:
     - intact_confidence_score:
         doc: >-
@@ -222,7 +239,7 @@ INTACT_INTERACTS_WITH_PROTEIN_PROTEIN:
     `(Protein)`-`(Protein)` interactions from IntAct (www.ebi.ac.uk/intact/).
 
     Further details in IntAct reference manual
-    (https://www.ebi.ac.uk/intact/resources/curation_manual)
+    (https://www.ebi.ac.uk/intact/resources/curation_manual).
   properties:
     - intact_confidence_score:
         doc: >-
@@ -241,7 +258,8 @@ INTACT_INTERACTS_WITH_PROTEIN_PROTEIN:
 INTACT_NOT_INTERACTS_WITH:
   source: Protein
   target: Protein
-  doc: null
+  doc: >-
+    Evidence of no PPI interaction from IntAct.
   properties:
     - intact_confidence_score:
         doc: >-
@@ -359,43 +377,50 @@ OPENTARGETS_DRUG_TO_TARGET:
 PATHWAY_TO_DISEASE:
   source: Pathway
   target: Disease
-  doc: null
+  doc: >-
+    Mapping of `(Pathway)` to `(Disease)`.
   properties: null
 
 PATHWAY_TO_LITERATURE:
   source: Pathway
   target: Literature
-  doc: null
+  doc: >-
+    Mapping of `(Pathway)` to `(Literature)`.
   properties: null
 
 PRECEDING_EVENT:
   source: Event
   target: Event
-  doc: null
+  doc: >-
+    Preceding `(Event)` to `(Event)`.
   properties: null
 
 PROTEIN_IN_EVENT:
   source: Protein
   target: Event
-  doc: null
+  doc: >-
+    Mapping of `(Protein)` to `(Event)`.
   properties: null
 
 PROTEIN_TO_DISEASE:
   source: Protein
   target: Disease
-  doc: null
+  doc: >-
+    Mapping of `(Protein)` to `(Disease)`.
   properties: null
 
 PROTEIN_TO_LITERATURE:
   source: Protein
   target: Literature
-  doc: null
+  doc: >-
+    Mapping of `(Protein)` to `(Literature)`.
   properties: null
 
 PROTEIN_IN_PATHWAY:
   source: Protein
   target: Pathway
-  doc: null
+  doc: >-
+    Mapping of `(Protein)` to `(Pathway)`.
   properties: null
 
 PRS:
@@ -433,37 +458,42 @@ PRS:
 SEM_GENE:
   source: SemmedTerm
   target: Gene
-  doc: null
+  doc: >-
+    Connection from semantic term `(SemmedTerm)` to `(Gene)` nodes where terms are genes.
   properties: null
 
 SEM_OBJ:
   source: SemmedTriple
   target: SemmedTerm
-  doc: null
+  doc: >-
+    Link between `(SemmedTriple)` subject and `(SemmedTerm)`.
   properties: null
 
 SEM_PREDICATE:
   source: SemmedTerm
   target: SemmedTerm
-  doc: null
+  doc: >-
+    Predicate relationship between two `(SemmedTerm)` nodes.
   properties:
     - predicate:
         doc: >-
-          The string representation of each predicate (for example TREATS, PROCESS_OF)
+          The string representation of each predicate (for example TREATS, PROCESS_OF).
     - count:
         doc: >-
-          The total predicate count
+          The total predicate count.
 
 SEM_SUB:
   source: SemmedTriple
   target: SemmedTerm
-  doc: null
+  doc: >-
+    Link between `(SemmedTriple)` object and `(SemmedTerm)`.
   properties: null
 
 SEM_TO_LIT:
   source: SemmedTriple
   target: Literature
-  doc: null
+  doc: >-
+    Relationship between the `(SemmedTriple)` and `(Literature)` nodes.
   properties: null
 
 STRING_INTERACT_WITH:
@@ -477,7 +507,8 @@ STRING_INTERACT_WITH:
 TOPHITS:
   source: Gwas
   target: Variant
-  doc: null
+  doc: >-
+    The default tophits for each GWAS, obtained from the MRC IEU OpenGWAS platform (https://gwas.mrcieu.ac.uk/).
   properties:
     - beta:
         doc: >-
@@ -489,7 +520,8 @@ TOPHITS:
 VARIANT_TO_GENE:
   source: Variant
   target: Gene
-  doc: null
+  doc: >-
+    Relationships between `(Variant)` and `(Gene)`, obtained via Ensembl VEP v37.
   properties:
     - location:
         doc: >-
@@ -562,19 +594,19 @@ XQTL_SINGLE_SNP_MR_GENE_GWAS:
   properties:
     - beta:
         doc: >-
-          Effect size
+          Effect size.
     - se:
         doc: >-
-          Standard error
+          Standard error.
     - p:
         doc: >-
-          P-Value
+          P-Value.
     - rsid:
         doc: >-
-          SNP rsID
+          SNP rsID.
     - qtl_type:
         doc: >-
-          pQTL, or eQTL
+          pQTL, or eQTL.
 
 XQTL_SINGLE_SNP_MR_SNP_GENE:
   source: Variant
