@@ -255,7 +255,9 @@ Pathway:
     - name:
         doc: >-
           Name of the pathway.
-    - in_disease
+    - in_disease:
+        doc: >-
+          Boolean indicating if there's any evidence that the pathway is involved in the cause of any disease.
     - reactome_id:
         doc: >-
           Reactome identifier of the pathway.

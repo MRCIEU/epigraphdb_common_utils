@@ -378,14 +378,14 @@ PATHWAY_TO_DISEASE:
   source: Pathway
   target: Disease
   doc: >-
-    Mapping of `(Pathway)` to `(Disease)`.
+    There's evidence of the pathway is involved in the cause of disease.
   properties: null
 
 PATHWAY_TO_LITERATURE:
   source: Pathway
   target: Literature
   doc: >-
-    Mapping of `(Pathway)` to `(Literature)`.
+    There's evidence about the pathway in the literature reference.
   properties: null
 
 PRECEDING_EVENT:
@@ -399,28 +399,28 @@ PROTEIN_IN_EVENT:
   source: Protein
   target: Event
   doc: >-
-    Mapping of `(Protein)` to `(Event)`.
+    The protein participates in the molecular event or 'reaction'.
   properties: null
 
 PROTEIN_TO_DISEASE:
   source: Protein
   target: Disease
   doc: >-
-    Mapping of `(Protein)` to `(Disease)`.
+    The protein, in any of its forms, is involved in the cause of disease.
   properties: null
 
 PROTEIN_TO_LITERATURE:
   source: Protein
   target: Literature
   doc: >-
-    Mapping of `(Protein)` to `(Literature)`.
+    There's evidence about the protein in the literature reference.
   properties: null
 
 PROTEIN_IN_PATHWAY:
   source: Protein
   target: Pathway
   doc: >-
-    Mapping of `(Protein)` to `(Pathway)`.
+    A protein is part of the pathway annotation in the lowest level pathway hierarchy.
   properties: null
 
 PRS:
@@ -502,7 +502,9 @@ STRING_INTERACT_WITH:
   doc: >-
     `(Protein)`-`(Protein)` interactions from STRING (https://string-db.org).
   properties:
-    - score
+    - score:
+        doc: >-
+          A value from 0 (low) to 1 (high) that indicates the confidence in the interaction to be true, as annotated by STRING.
 
 TOPHITS:
   source: Gwas
