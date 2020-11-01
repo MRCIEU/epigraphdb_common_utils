@@ -10,6 +10,8 @@ At the moment, the common utils contain the following
 
 - environment variable usage by various components,
   i.e. python servers and docker containers.
+- data dictionary for data entities ("meta entities")
+  of the EpiGraphDB graph database and platform.
 
 ## Dependency
 
