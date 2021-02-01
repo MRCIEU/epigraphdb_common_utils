@@ -47,13 +47,16 @@ env_configs = EnvConfigs(
         "EPIGRAPHDB_PASSWD",
         secret=True,
         desc="""
-        EpiGraphDB grah: Password
+        EpiGraphDB graph: Password
         """,
     ),
     epigraphdb_db_version=EnvVar(
         "EPIGRAPHDB_DB_VERSION",
+        default="1.0",
         desc="""
         EpiGraphDB graph: version number
+
+        Also used as the overall platform version
         """,
     ),
     # pqtl graph
@@ -80,11 +83,12 @@ env_configs = EnvConfigs(
         "PQTL_PASSWD",
         secret=True,
         desc="""
-        PQTL grah: Password
+        PQTL graph: Password
         """,
     ),
     pqtl_db_version=EnvVar(
         "PQTL_DB_VERSION",
+        default="3.0",
         desc="""
         PQTL graph: version number
         """,
