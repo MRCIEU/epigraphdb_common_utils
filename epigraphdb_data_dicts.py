@@ -1,12 +1,12 @@
-from itertools import chain
 from pathlib import Path
-from typing import Dict, List, Optional, Union
+from typing import Any, Dict, List
 
 import yaml
 from pydantic import BaseModel
 
-META_NODES_FILE = Path(__file__).parent / "data-dict-meta-nodes.yml"
-META_RELS_FILE = Path(__file__).parent / "data-dict-meta-rels.yml"
+SCHEMA_FILE = Path(__file__).parent / "db_schema.yaml"
+# list of properties that should not render, as they are not normal properties
+META_REL_PROP_BLACKLIST = ["source", "target"]
 
 
 class PopulatedProperty(BaseModel):
@@ -16,52 +16,29 @@ class PopulatedProperty(BaseModel):
 
 class DataDictNodeEntity(BaseModel):
     "Meta node entity as specified by the data dict."
-    id: Optional[str]
-    name: Optional[str]
-    doc: Optional[str]
-    properties: List[Union[str, Dict[str, PopulatedProperty]]]
+    id: str
+    name: str
+    doc: str
+    properties: Dict[str, PopulatedProperty]
 
 
 class DataDictRelEntity(BaseModel):
     "Meta relationship entity as specified by the data dict."
     source: str
     target: str
-    doc: Optional[str]
-    properties: Optional[List[Union[str, Dict[str, PopulatedProperty]]]]
+    doc: str
+    properties: Dict[str, PopulatedProperty]
 
 
-with META_NODES_FILE.open("r") as f:
-    meta_nodes_dict = yaml.safe_load(f)
-
-with META_RELS_FILE.open("r") as f:
-    meta_rels_dict = yaml.safe_load(f)
-
-
-def get_doc(item: Union[str, Dict]) -> Optional[Dict]:
-    if isinstance(item, str):
-        return {item: None}
-    elif isinstance(item, dict):
-        res_dict = list(item.items())[0]
-        if "doc" in res_dict[1].keys():
-            return {res_dict[0]: res_dict[1]["doc"]}
-        else:
-            return res_dict[0]
-
-
-def get_property_docs(
-    property_data: List[Union[str, Dict]]
-) -> Optional[Dict[str, Optional[str]]]:
-
-    if property_data is None:
-        return None
-    else:
-        dict_list = [get_doc(item) for item in property_data]
-        res: Dict[str, Optional[str]] = dict(
-            chain.from_iterable(_.items())  # type: ignore
-            for _ in dict_list
-            if _ is not None
-        )
-        return res
+def sanitise_properties(
+    property_data: Dict[str, Dict], blacklist: List[str] = []
+) -> Dict[str, Dict[str, Any]]:
+    property_docs = {
+        key: {"doc": value["doc"]}
+        for key, value in property_data.items()
+        if key not in blacklist
+    }
+    return property_docs
 
 
 def sanitise_meta_nodes_dict(meta_nodes_dict, property_docs):
@@ -69,9 +46,11 @@ def sanitise_meta_nodes_dict(meta_nodes_dict, property_docs):
     """
 
     def _render(key, entity):
+        id_field = entity["meta"]["_id"]
+        name_field = entity["meta"]["_name"]
         res = {
-            "id": entity["id"],
-            "name": entity["name"],
+            "id": id_field,
+            "name": name_field,
             "doc": entity["doc"],
             "properties": property_docs[key],
         }
@@ -86,9 +65,11 @@ def sanitise_meta_rels_dict(meta_rels_dict, property_docs):
     """
 
     def _render(key, entity):
+        source_field = entity["properties"]["source"]["type"]
+        target_field = entity["properties"]["target"]["type"]
         res = {
-            "source": entity["source"],
-            "target": entity["target"],
+            "source": source_field,
+            "target": target_field,
             "doc": entity["doc"],
             "properties": property_docs[key],
         }
@@ -98,19 +79,27 @@ def sanitise_meta_rels_dict(meta_rels_dict, property_docs):
     return res
 
 
+with SCHEMA_FILE.open("r") as f:
+    schema_dict = yaml.safe_load(f)
+    meta_nodes_dict = schema_dict["meta_nodes"]
+    meta_rels_dict = schema_dict["meta_rels"]
+
+
 # For displaying property docs at data table
-meta_nodes_property_docs = {
-    key: get_property_docs(value["properties"])
+meta_nodes_properties_sanitised = {
+    key: sanitise_properties(value["properties"])
     for key, value in meta_nodes_dict.items()
 }
-meta_rels_property_docs = {
-    key: get_property_docs(value["properties"])
+meta_rels_properties_sanitised = {
+    key: sanitise_properties(
+        value["properties"], blacklist=META_REL_PROP_BLACKLIST
+    )
     for key, value in meta_rels_dict.items()
 }
 # For displaying schema docs at docs site
 meta_nodes_dict_sanitised = sanitise_meta_nodes_dict(
-    meta_nodes_dict, meta_nodes_property_docs
+    meta_nodes_dict, meta_nodes_properties_sanitised
 )
 meta_rels_dict_sanitised = sanitise_meta_rels_dict(
-    meta_rels_dict, meta_rels_property_docs
+    meta_rels_dict, meta_rels_properties_sanitised
 )

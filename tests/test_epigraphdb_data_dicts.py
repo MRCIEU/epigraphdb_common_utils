@@ -1,33 +1,38 @@
+from pprint import pprint
+
 import pytest
 
 from epigraphdb_common_utils.epigraphdb_data_dicts import (
     DataDictNodeEntity,
     DataDictRelEntity,
-    meta_nodes_dict,
-    meta_nodes_property_docs,
-    meta_rels_dict,
-    meta_rels_property_docs,
+    PopulatedProperty,
+    meta_nodes_dict_sanitised,
+    meta_nodes_properties_sanitised,
+    meta_rels_dict_sanitised,
+    meta_rels_properties_sanitised,
 )
 
 
 @pytest.mark.parametrize(
-    "docs_data", [meta_nodes_property_docs, meta_rels_property_docs]
+    "prop_data", [meta_nodes_properties_sanitised, meta_rels_properties_sanitised]
 )
-def test_docs(docs_data):
-    assert isinstance(docs_data, dict)
-    for key, value in docs_data.items():
+def test_properties(prop_data):
+    assert isinstance(prop_data, dict)
+    for key, value in prop_data.items():
         if isinstance(value, dict):
             for value_key, value_value in value.items():
-                assert isinstance(value_value, str) or value_value is None
+                assert PopulatedProperty(**value_value)
 
 
 def test_node_dict():
-    for key, value in meta_nodes_dict.items():
+    for key, value in meta_nodes_dict_sanitised.items():
         print(key)
+        pprint(value)
         assert DataDictNodeEntity(**value)
 
 
 def test_rel_dict():
-    for key, value in meta_rels_dict.items():
+    for key, value in meta_rels_dict_sanitised.items():
         print(key)
+        pprint(value)
         assert DataDictRelEntity(**value)
