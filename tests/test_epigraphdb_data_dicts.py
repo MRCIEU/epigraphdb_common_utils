@@ -14,7 +14,8 @@ from epigraphdb_common_utils.epigraphdb_data_dicts import (
 
 
 @pytest.mark.parametrize(
-    "prop_data", [meta_nodes_properties_sanitised, meta_rels_properties_sanitised]
+    "prop_data",
+    [meta_nodes_properties_sanitised, meta_rels_properties_sanitised],
 )
 def test_properties(prop_data):
     assert isinstance(prop_data, dict)

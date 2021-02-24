@@ -7,11 +7,17 @@ from pydantic import BaseModel
 SCHEMA_FILE = Path(__file__).parent / "db_schema.yaml"
 # list of properties that should not render, as they are not normal properties
 META_REL_PROP_BLACKLIST = ["source", "target"]
+NEO4J_TYPE_MAPPING = {
+    "string": "str",
+    "float": "float",
+    "integer": "int",
+}
 
 
 class PopulatedProperty(BaseModel):
     "The property field populated."
     doc: str
+    type: str
 
 
 class DataDictNodeEntity(BaseModel):
@@ -33,8 +39,19 @@ class DataDictRelEntity(BaseModel):
 def sanitise_properties(
     property_data: Dict[str, Dict], blacklist: List[str] = []
 ) -> Dict[str, Dict[str, Any]]:
+    def _format_type(value: Dict) -> str:
+        # array
+        if value["type"] == "array":
+            item_type = NEO4J_TYPE_MAPPING[value["items"]["type"]]
+            res = f"List[{item_type}]"
+            return res
+        # scalar
+        else:
+            res = NEO4J_TYPE_MAPPING[value["type"]]
+            return res
+
     property_docs = {
-        key: {"doc": value["doc"]}
+        key: {"doc": value["doc"], "type": _format_type(value)}
         for key, value in property_data.items()
         if key not in blacklist
     }
