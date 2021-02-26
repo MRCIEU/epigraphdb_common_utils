@@ -7,11 +7,7 @@ from pydantic import BaseModel
 SCHEMA_FILE = Path(__file__).parent / "db_schema.yaml"
 # list of properties that should not render, as they are not normal properties
 META_REL_PROP_BLACKLIST = ["source", "target"]
-NEO4J_TYPE_MAPPING = {
-    "string": "str",
-    "float": "float",
-    "integer": "int",
-}
+NEO4J_TYPE_MAPPING = {"string": "str", "float": "float", "integer": "int"}
 
 
 class PopulatedProperty(BaseModel):
@@ -96,13 +92,17 @@ def sanitise_meta_rels_dict(meta_rels_dict, property_docs):
     return res
 
 
+def collect_doc(properties: Dict[str, Dict[str, Any]]) -> Dict[str, str]:
+    res = {key: value["doc"] for key, value in properties.items()}
+    return res
+
+
 with SCHEMA_FILE.open("r") as f:
     schema_dict = yaml.safe_load(f)
     meta_nodes_dict = schema_dict["meta_nodes"]
     meta_rels_dict = schema_dict["meta_rels"]
 
 
-# For displaying property docs at data table
 meta_nodes_properties_sanitised = {
     key: sanitise_properties(value["properties"])
     for key, value in meta_nodes_dict.items()
@@ -113,7 +113,16 @@ meta_rels_properties_sanitised = {
     )
     for key, value in meta_rels_dict.items()
 }
-# For displaying schema docs at docs site
+
+meta_nodes_property_docs = {
+    key: collect_doc(value)
+    for key, value in meta_nodes_properties_sanitised.items()
+}
+meta_rels_property_docs = {
+    key: collect_doc(value)
+    for key, value in meta_rels_properties_sanitised.items()
+}
+
 meta_nodes_dict_sanitised = sanitise_meta_nodes_dict(
     meta_nodes_dict, meta_nodes_properties_sanitised
 )
