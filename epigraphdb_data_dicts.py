@@ -55,8 +55,7 @@ def sanitise_properties(
 
 
 def sanitise_meta_nodes_dict(meta_nodes_dict, property_docs):
-    """Sanitise data dictionary for proper formatting
-    """
+    """Sanitise data dictionary for proper formatting"""
 
     def _render(key, entity):
         id_field = entity["meta"]["_id"]
@@ -74,8 +73,7 @@ def sanitise_meta_nodes_dict(meta_nodes_dict, property_docs):
 
 
 def sanitise_meta_rels_dict(meta_rels_dict, property_docs):
-    """Sanitise data dictionary for proper formatting
-    """
+    """Sanitise data dictionary for proper formatting"""
 
     def _render(key, entity):
         source_field = entity["properties"]["source"]["type"]
