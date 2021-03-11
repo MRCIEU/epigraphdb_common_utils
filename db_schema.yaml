@@ -995,7 +995,12 @@ meta_rels:
         type: float
       selection:
         doc: >-
-          TODO Ben
+          Instrument selection.
+
+          - DF: directionality filtering
+          - HF: heterogeneity filtering
+          - Tophits: no filtering
+          - DF + HF: both types of filtering
         type: string
     required:
       - source
