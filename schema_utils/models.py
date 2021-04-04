@@ -1,6 +1,5 @@
+from dataclasses import dataclass
 from typing import Dict
-
-from pydantic.dataclasses import dataclass
 
 
 @dataclass
