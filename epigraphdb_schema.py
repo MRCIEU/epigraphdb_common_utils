@@ -3,7 +3,7 @@ from typing import Dict
 
 import yaml
 
-from .schema_utils.models import DataDictNode, DataDictRel
+from .schema_utils.models import DataDictNode, DataDictRel, SchemaExtra
 from .schema_utils.processing import (
     collect_doc,
     sanitise_meta_nodes,
@@ -11,12 +11,16 @@ from .schema_utils.processing import (
 )
 
 SCHEMA_FILE = Path(__file__).parent / "db_schema.yaml"
+SCHEMA_EXTRA_FILE = Path(__file__).parent / "db_schema_extra.yml"
 
 
 with SCHEMA_FILE.open("r") as f:
     schema_dict = yaml.safe_load(f)
     meta_nodes_dict_raw = schema_dict["meta_nodes"]
     meta_rels_dict_raw = schema_dict["meta_rels"]
+
+with SCHEMA_EXTRA_FILE.open("r") as f:
+    schema_extra_dict: SchemaExtra = yaml.safe_load(f)
 
 
 meta_nodes_dict: Dict[str, DataDictNode] = sanitise_meta_nodes(
