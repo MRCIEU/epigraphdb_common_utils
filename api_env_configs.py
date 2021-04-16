@@ -59,6 +59,21 @@ env_configs = EnvConfigs(
         Also used as the overall platform version
         """,
     ),
+    # public epigraphdb graph
+    public_epigraphdb_server=EnvVar(
+        "PUBLIC_EPIGRAPHDB_SERVER",
+        default="0.0.0.0",
+        desc="""
+        EpiGraphDB graph (public): server name / ip address
+        """,
+    ),
+    public_epigraphdb_port=EnvVar(
+        "PUBLIC_EPIGRAPHDB_PORT",
+        default="7687",
+        desc="""
+        EpiGraphDB graph (public): bolt port
+        """,
+    ),
     # pqtl graph
     pqtl_server=EnvVar(
         "PQTL_SERVER",
