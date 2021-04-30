@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, List, Union
+from typing import Dict, List, Optional, Union
 
 from typing_extensions import Literal, TypedDict
 
@@ -13,12 +13,37 @@ class EntityProperty:
 
 
 @dataclass
+class Resource:
+    name: str
+    uri: str
+    url: str
+    meta_nodes: List[str]
+    meta_rels: List[str]
+    query_ents: List[str]
+    assoc_ents: Optional[List[str]] = None
+
+
+@dataclass
+class LinkedResource:
+    url: str
+    queriable: bool = False
+
+
+@dataclass
+class MetaEntityResources:
+    api: Optional[Dict[str, LinkedResource]]
+    web: Optional[Dict[str, LinkedResource]]
+    rpkg: Optional[Dict[str, LinkedResource]]
+
+
+@dataclass
 class DataDictNode:
     "Meta node entity as specified by the data dict."
     id: str
     name: str
     doc: str
     properties: Dict[str, EntityProperty]
+    resources: MetaEntityResources
 
 
 @dataclass
@@ -28,6 +53,7 @@ class DataDictRel:
     target: str
     doc: str
     properties: Dict[str, EntityProperty]
+    resources: MetaEntityResources
 
 
 class RawPropertyScalar(TypedDict):

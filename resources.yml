@@ -1,0 +1,69 @@
+api:
+  get_mr:
+    name: "GET /mr"
+    uri: "get-mr"
+    meta_nodes:
+      - Gwas
+    meta_rels:
+      - MR_EVE_MR
+    query_ents:
+      - Gwas
+  get_genetic_cor:
+    name: "GET /genetic-cor"
+    uri: "get-genetic-cor"
+    meta_nodes:
+      - Gwas
+    meta_rels:
+      - GEN_COR
+    query_ents:
+      - Gwas
+  get_obs_cor:
+    name: "GET /obs-cor"
+    uri: "get-obs-cor"
+    meta_nodes:
+      - Gwas
+    meta_rels:
+      - OBS_COR
+    query_ents:
+      - Gwas
+  get_confounder:
+    name: "GET /confounder"
+    uri: "get-confounder"
+    meta_nodes:
+      - Gwas
+    meta_rels:
+      - MR_EVE_MR
+    query_ents:
+      - Gwas
+
+web:
+  mr:
+    name: "MR causal estimate"
+    uri: "mr"
+    parent: get_mr
+  genetic_cor:
+    name: "Genetic correlation"
+    uri: "genetic-cor"
+    parent: get_genetic_cor
+  obs_cor:
+    name: "Observational correlation"
+    uri: "obs-cor"
+    parent: get_obs_cor
+  confounder:
+    name: "Confounder MR causal estimate"
+    uri: "confounder"
+    parent: get_confounder
+
+rpkg:
+  mr:
+    uri: "mr"
+    parent: get_mr
+  genetic_cor:
+    uri: "genetic_cor"
+    parent: get_genetic_cor
+  obs_cor:
+    uri: "obs_cor"
+    parent: get_obs_cor
+  confounder:
+    uri: "confounder"
+    parent: get_confounder
