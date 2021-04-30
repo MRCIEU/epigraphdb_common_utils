@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Union
 
 from typing_extensions import Literal, TypedDict
 
@@ -57,14 +57,3 @@ class RawMetaRel(TypedDict):
     doc: str
     properties: Dict[str, Union[RawPropertyScalar, RawPropertyArray]]
     required: List[str]
-
-
-class SchemaExtraEntity(TypedDict):
-    api: Optional[List[str]]
-    web: Optional[List[str]]
-    r: Optional[List[str]]
-
-
-class SchemaExtra(TypedDict):
-    meta_nodes: Dict[str, SchemaExtraEntity]
-    meta_rels: Dict[str, SchemaExtraEntity]
