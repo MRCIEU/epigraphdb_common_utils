@@ -8,6 +8,9 @@ api:
       - MR_EVE_MR
     query_ents:
       - Gwas
+    triples:
+      - "(Gwas)-[MR_EVE_MR]->(Gwas)"
+      - "(Gwas)<-[MR_EVE_MR]-(Gwas)"
   get_genetic_cor:
     name: "GET /genetic-cor"
     uri: "get-genetic-cor"
@@ -17,6 +20,9 @@ api:
       - GEN_COR
     query_ents:
       - Gwas
+    triples:
+      - "(Gwas)-[GEN_COR]->(Gwas)"
+      - "(Gwas)<-[GEN_COR]-(Gwas)"
   get_obs_cor:
     name: "GET /obs-cor"
     uri: "get-obs-cor"
@@ -26,6 +32,9 @@ api:
       - OBS_COR
     query_ents:
       - Gwas
+    triples:
+      - "(Gwas)-[OBS_COR]->(Gwas)"
+      - "(Gwas)<-[OBS_COR]-(Gwas)"
   get_confounder:
     name: "GET /confounder"
     uri: "get-confounder"
@@ -35,6 +44,21 @@ api:
       - MR_EVE_MR
     query_ents:
       - Gwas
+    triples:
+      - "(Gwas)-[MR_EVE_MR]->(Gwas)"
+      - "(Gwas)<-[MR_EVE_MR]-(Gwas)"
+  get_prs:
+    name: "GET /prs"
+    uri: "get-prs"
+    meta_nodes:
+      - Gwas
+    meta_rels:
+      - PRS
+    query_ents:
+      - Gwas
+    triples:
+      - "(Gwas)-[PRS]->(Gwas)"
+      - "(Gwas)<-[PRS]-(Gwas)"
 
 web:
   mr:
@@ -53,6 +77,10 @@ web:
     name: "Confounder MR causal estimate"
     uri: "confounder"
     parent: get_confounder
+  prs:
+    name: "Polygenic risk scores results"
+    uri: "prs"
+    parent: get_prs
 
 rpkg:
   mr:

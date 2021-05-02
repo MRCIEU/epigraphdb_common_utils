@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, Set, Union
 
 from typing_extensions import Literal, TypedDict
 
@@ -14,18 +14,18 @@ class EntityProperty:
 
 @dataclass
 class Resource:
-    name: str
+    label: str
     uri: str
     url: str
     meta_nodes: List[str]
     meta_rels: List[str]
     query_ents: List[str]
+    triples: Optional[Set[str]] = None
     assoc_ents: Optional[List[str]] = None
 
 
 @dataclass
 class LinkedResource:
-    url: str
     queriable: bool = False
 
 

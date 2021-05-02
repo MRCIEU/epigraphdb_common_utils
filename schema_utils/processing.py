@@ -155,14 +155,16 @@ def process_resources(
 def process_api_resource(item: Dict) -> models.Resource:
     url = api_url_formatter(item["uri"])
     assoc_ents = item["assoc_ents"] if "assoc_ents" in item.keys() else None
+    triples = set(item["triples"]) if "triples" in item.keys() else None
     res = models.Resource(
-        name=item["name"],
+        label=item["name"],
         uri=item["uri"],
         url=url,
         meta_nodes=item["meta_nodes"],
         meta_rels=item["meta_rels"],
         query_ents=item["query_ents"],
         assoc_ents=assoc_ents,
+        triples=triples,
     )
     return res
 
@@ -173,7 +175,7 @@ def process_web_resource(
     url = web_url_formatter(item["uri"])
     if "parent" in item.keys() and item["parent"] in api_resources.keys():
         res = copy.deepcopy(api_resources[item["parent"]])
-        res.name = item["name"]
+        res.label = item["name"]
         res.uri = item["uri"]
         res.url = url
     else:
@@ -181,7 +183,7 @@ def process_web_resource(
             item["assoc_ents"] if "assoc_ents" in item.keys() else None
         )
         res = models.Resource(
-            name=item["name"],
+            label=item["name"],
             uri=item["uri"],
             url=url,
             meta_nodes=item["meta_nodes"],
@@ -198,7 +200,7 @@ def process_rpkg_resource(
     url = rpkg_url_formatter(item["uri"])
     if "parent" in item.keys() and item["parent"] in api_resources.keys():
         res = copy.deepcopy(api_resources[item["parent"]])
-        res.name = item["uri"]
+        res.label = item["uri"]
         res.uri = item["uri"]
         res.url = url
     else:
@@ -206,7 +208,7 @@ def process_rpkg_resource(
             item["assoc_ents"] if "assoc_ents" in item.keys() else None
         )
         res = models.Resource(
-            name=item["uri"],
+            label=item["uri"],
             uri=item["uri"],
             url=url,
             meta_nodes=item["meta_nodes"],
@@ -237,16 +239,12 @@ def collect_resources(
 ) -> Optional[Dict[str, models.LinkedResource]]:
     linked_resources = []
     for key, item in resources.items():
-        if entity_type == "meta_node" and entity in item.meta_nodes:
+        meta_node_p = entity_type == "meta_node" and entity in item.meta_nodes
+        meta_rel_p = entity_type == "meta_rel" and entity in item.meta_rels
+        if meta_node_p or meta_rel_p:
             queriable = True if entity in item.query_ents else False
             linked_item = models.LinkedResource(
-                url=item.url, queriable=queriable
-            )
-            linked_resources.append({"key": key, "item": linked_item})
-        if entity_type == "meta_rel" and entity in item.meta_rels:
-            queriable = True if entity in item.query_ents else False
-            linked_item = models.LinkedResource(
-                url=item.url, queriable=queriable
+                queriable=queriable,
             )
             linked_resources.append({"key": key, "item": linked_item})
     if len(linked_resources) == 0:
