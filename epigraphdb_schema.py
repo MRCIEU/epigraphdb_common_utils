@@ -18,6 +18,7 @@ from .schema_utils.processing import (
 
 SCHEMA_FILE = Path(__file__).parent / "db_schema.yaml"
 RESOURCES_FILE = Path(__file__).parent / "resources.yml"
+RESOURCES_EXTRA_FILE = Path(__file__).parent / "resources_extra.yml"
 
 
 with SCHEMA_FILE.open("r") as f:
@@ -27,6 +28,9 @@ with SCHEMA_FILE.open("r") as f:
 
 with RESOURCES_FILE.open("r") as f:
     resources_dict_raw: Dict[str, Any] = yaml.safe_load(f)
+
+with RESOURCES_EXTRA_FILE.open("r") as f:
+    resources_extra_dict: Dict[str, Any] = yaml.safe_load(f)
 
 resources_dict = process_resources(resources_dict_raw)
 

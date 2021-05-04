@@ -21,6 +21,7 @@ class Resource:
     meta_rels: List[str]
     query_ents: List[str]
     triples: Optional[Set[str]] = None
+    # TODO: this should probably go
     assoc_ents: Optional[List[str]] = None
 
 

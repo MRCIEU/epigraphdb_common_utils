@@ -1,0 +1,71 @@
+nodes:
+  Gwas:
+    - assoc_ent: "pqtl_trait"
+      mapper: "pqtl_trait_mapper"
+      queriable: True
+    - assoc_ent: "covid_xqtl_trait"
+      mapper: "covid_xqtl_trait_mapper"
+      queriable: True
+  Gene:
+    - assoc_ent: "pqtl_gene"
+      mapper: "pqtl_gene_mapper"
+      queriable: True
+    - assoc_ent: "covid_xqtl_gene"
+      mapper: "covid_xqtl_gene_mapper"
+      queriable: True
+  Tissue:
+    - assoc_ent: "covid_xqtl_tissue"
+      mapper: "covid_xqtl_tissue_mapper"
+      queriable: True
+  Variant:
+    - assoc_ent: "covid_xqtl_snp"
+      mapper: "covid_xqtl_snp_mapper"
+      queriable: False
+
+assoc_ents:
+  pqtl_trait:
+    api: pqtl
+    web: pqtl
+    rpkg: pqtl
+  pqtl_gene:
+    api: pqtl
+    web: pqtl
+    rpkg: pqtl
+  # api and rpkg for covid_xqtl is too complicated
+  covid_xqtl_trait:
+    api: null
+    web: covid_xqtl
+    rpkg: null
+  covid_xqtl_gene:
+    api: null
+    web: covid_xqtl
+    rpkg: null
+  covid_xqtl_tissue:
+    api: null
+    web: covid_xqtl
+    rpkg: null
+  covid_xqtl_snp:
+    api: null
+    web: covid_xqtl
+    rpkg: null
+
+assoc_resources:
+  api:
+    pqtl:
+      name: "GET /pqtl/"
+      uri: "get-pqtl"
+      label: "Return information related to the pQTL analysis."
+  web:
+    pqtl:
+      name: "pqtl"
+      label: "Proteome PheWAS browser"
+      url_fn: "pqtl_url_generator"
+    covid_xqtl:
+      name: "ctda"
+      label: "COVID-19 Disease-Target Atlas"
+      url_fn: "covid_xqtl_url_generator"
+  rpkg:
+    pqtl:
+      name: "pqtl"
+      label: "Return information related to the pQTL analysis."
+      uri: "pqtl"
