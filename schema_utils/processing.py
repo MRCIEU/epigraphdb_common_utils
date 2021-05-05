@@ -225,7 +225,9 @@ def api_url_formatter(uri: str) -> str:
 
 
 def web_url_formatter(uri: str) -> str:
-    url_template = "https://epigraphdb.org/{uri}"
+    # url_template = "https://epigraphdb.org/{uri}"
+    # this should be enough for a web instance?
+    url_template = "/{uri}"
     return url_template.format(uri=uri)
 
 

@@ -1,3 +1,6 @@
+# eventually still need some form of entity list caching for
+# more complex resources e.g. drugs_risk_factors, xqtl
+# TODO: think about a better solution regarding triples and query_ents
 api:
   get_mr:
     name: "GET /mr"
@@ -59,6 +62,91 @@ api:
     triples:
       - "(Gwas)-[PRS]->(Gwas)"
       - "(Gwas)<-[PRS]-(Gwas)"
+  get_pathway:
+    name: "GET /pathway"
+    uri: "get-pathway"
+    meta_nodes:
+      - Gwas
+      - Variant
+      - Gene
+      - Protein
+      - Pathway
+    meta_rels:
+      - GWAS_TO_VARIANT
+      - VARIANT_TO_GENE
+      - GENE_TO_PROTEIN
+      - PROTEIN_IN_PATHWAY
+    query_ents:
+      - Gwas
+    triples:
+      - "(Gwas)-[GWAS_TO_VARIANT]->(Variant)"
+      - "(Variant)-[VARIANT_TO_GENE]->(Gene)"
+      - "(Gene)-[GENE_TO_PROTEIN]->(Protein)"
+      - "(Protein)-[PROTEIN_IN_PATHWAY]->(Pathway)"
+  get_ontology_gwas_efo:
+    name: "GET /ontology/gwas-efo"
+    uri: "get-ontologygwas-efo"
+    meta_nodes:
+      - Gwas
+      - Efo
+    meta_rels:
+      - GWAS_NLP_EFO
+    query_ents:
+      - Gwas
+      - Efo
+    triples:
+      - "(Gwas)-[GWAS_NLP_EFO]->(Efo)"
+      - "(Efo)<-[GWAS_NLP_EFO]-(Gwas)"
+  get_ontology_disease_efo:
+    name: "GET /ontology/disease-efo"
+    uri: "get-ontologydisease-efo"
+    meta_nodes:
+      - Disease
+      - Efo
+    meta_rels:
+      - MONDO_MAP_EFO
+    query_ents:
+      - Disease
+      - Efo
+    triples:
+      - "(Disease)-[MONDO_MAP_EFO]->(Efo)"
+      - "(Efo)<-[MONDO_MAP_EFO]-(Disease)"
+  get_ontology_gwas_efo_disease:
+    name: "GET /ontology/gwas-efo-disease"
+    uri: "get-ontologydisease-efo"
+    meta_nodes:
+      - Gwas
+      - Disease
+      - Efo
+    meta_rels:
+      - GWAS_NLP_EFO
+      - MONDO_MAP_EFO
+    query_ents:
+      - Gwas
+      - Disease
+      - Efo
+    triples:
+      - "(Gwas)-[GWAS_NLP_EFO]->(Efo)"
+      - "(Disease)-[MONDO_MAP_EFO]->(Efo)"
+      - "(Efo)<-[GWAS_NLP_EFO]-(Gwas)"
+      - "(Efo)<-[MONDO_MAP_EFO]-(Disease)"
+  get_literature_gwas:
+    name: "GET /literature/gwas"
+    uri: "get-literaturegwas"
+    meta_nodes:
+      - Gwas
+      - LiteratureTriple
+      - Literature
+    meta_rels:
+      - GWAS_TO_LITERATURE_TRIPLE
+      - SEMMEDDB_TO_LIT
+    query_ents:
+      - Gwas
+    triples:
+      - "(Gwas)-[GWAS_TO_LITERATURE_TRIPLE]->(LiteratureTriple)"
+      - "(LiteratureTriple)<-[GWAS_TO_LITERATURE_TRIPLE]-(Gwas)"
+      - "(LiteratureTriple)-[SEMMEDDB_TO_LIT]->(Literature)"
+      - "(Literature)<-[SEMMEDDB_TO_LIT]-(LiteratureTriple)"
 
 web:
   mr:
@@ -81,6 +169,19 @@ web:
     name: "Polygenic risk scores results"
     uri: "prs"
     parent: get_prs
+  pathway:
+    name: "Pathway-based stratification of instruments"
+    uri: "pathway"
+    parent: get_pathway
+  ontology_trait_disease:
+    name: "Mapping of GWAS traits to disease labels via EFO terms"
+    uri: "ontology/trait-disease"
+    parent: get_ontology_gwas_efo_disease
+  literature_trait:
+    name: "Literature evidence regarding GWAS traits"
+    uri: "literature/trait"
+    parent: get_literature_gwas
+
 
 rpkg:
   mr:
@@ -95,3 +196,12 @@ rpkg:
   confounder:
     uri: "confounder"
     parent: get_confounder
+  pathway:
+    uri: "pathway"
+    parent: get_confounder
+  ontology_gwas_efo:
+    uri: "ontology_gwas_efo"
+    parent: get_ontology_gwas_efo
+  literature_gwas:
+    uri: "literature_gwas"
+    parent: get_literature_gwas
