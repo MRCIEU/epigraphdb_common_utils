@@ -74,6 +74,22 @@ env_configs = EnvConfigs(
         EpiGraphDB graph (public): bolt port
         """,
     ),
+    public_epigraphdb_user=EnvVar(
+        "PUBLIC_EPIGRAPHDB_USER",
+        default=None,
+        secret=True,
+        desc="""
+        EpiGraphDB graph (public): User name
+        """,
+    ),
+    public_epigraphdb_passwd=EnvVar(
+        "PUBLIC_EPIGRAPHDB_PASSWD",
+        default=None,
+        secret=True,
+        desc="""
+        EpiGraphDB graph (public): Password
+        """,
+    ),
     # pqtl graph
     pqtl_server=EnvVar(
         "PQTL_SERVER",
