@@ -1,7 +1,6 @@
 from typing import Dict
 
-# HACK: neural is using pydantic 1.7 whereas others using 1.8
-from pydantic import create_model_from_typeddict  # type: ignore
+from pydantic import create_model_from_typeddict
 
 from ..epigraphdb_schema import (
     DataDictNode,
