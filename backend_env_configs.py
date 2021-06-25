@@ -69,4 +69,11 @@ env_configs = EnvConfigs(
         this port should be the internal port, not the exposed port.
         """,
     ),
+    # paired neural
+    neural_url=EnvVar(
+        "NEURAL_URL",
+        desc="""
+        Paired `epigraphdb_neural` URL
+        """,
+    ),
 )
