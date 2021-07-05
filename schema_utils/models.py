@@ -3,6 +3,70 @@ from typing import Dict, List, Optional, Set, Union
 
 from typing_extensions import Literal, TypedDict
 
+# TODO: document resource fields
+
+
+class RawResource(TypedDict):
+    name: str
+    uri: str
+    meta_nodes: List[str]
+    meta_rels: List[str]
+    query_ents: List[str]
+    triples: List[str]
+
+
+class RawWebResourceWithParent(TypedDict):
+    name: str
+    uri: str
+    parent: str
+
+
+class RawRpkgResourceWithParent(TypedDict):
+    uri: str
+    parent: str
+
+
+class RawResources(TypedDict):
+    api: Dict[str, RawResource]
+    web: Dict[str, Union[RawWebResourceWithParent, RawResource]]
+    rpkg: Dict[str, Union[RawRpkgResourceWithParent, RawResource]]
+
+
+class RawResourcesExtraNode(TypedDict):
+    assoc_ent: str
+    mapper: str
+    queriable: bool
+
+
+class RawResourcesExtraAssocEnt(TypedDict):
+    api: Optional[str]
+    web: Optional[str]
+    rpkg: Optional[str]
+
+
+class RawResourcesExtraAssocResourceApi(TypedDict):
+    name: str
+    uri: str
+    label: str
+
+
+class RawResourcesExtraAssocResourceWeb(TypedDict):
+    name: str
+    label: str
+    url_fn: str
+
+
+class RawResourcesExtraAssocResources(TypedDict):
+    api: Dict[str, RawResourcesExtraAssocResourceApi]
+    web: Dict[str, RawResourcesExtraAssocResourceWeb]
+    rpkg: Dict[str, RawResourcesExtraAssocResourceApi]
+
+
+class RawResourcesExtra(TypedDict):
+    nodes: Dict[str, List[RawResourcesExtraNode]]
+    assoc_ents: Dict[str, RawResourcesExtraAssocEnt]
+    assoc_resources: RawResourcesExtraAssocResources
+
 
 @dataclass
 class Resource:

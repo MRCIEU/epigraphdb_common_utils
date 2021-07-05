@@ -1,11 +1,11 @@
 import copy
-from typing import Any, Dict
+from typing import Dict, Union, cast
 
 from . import models
 
 
 def process_resources(
-    resources_dict_raw: Dict[str, Any]
+    resources_dict_raw: models.RawResources,
 ) -> models.EpigraphdbPlatformResources:
     api_resources: Dict[str, models.Resource] = {
         key: process_api_resource(value)
@@ -27,7 +27,7 @@ def process_resources(
     return res
 
 
-def process_api_resource(item: Dict) -> models.Resource:
+def process_api_resource(item: models.RawResource) -> models.Resource:
     url = api_url_formatter(item["uri"])
     triples = set(item["triples"]) if "triples" in item.keys() else None
     res = models.Resource(
@@ -43,15 +43,19 @@ def process_api_resource(item: Dict) -> models.Resource:
 
 
 def process_web_resource(
-    item: Dict, api_resources: Dict[str, models.Resource]
+    item: Union[models.RawWebResourceWithParent, models.RawResource],
+    api_resources: Dict[str, models.Resource],
 ) -> models.Resource:
     url = web_url_formatter(item["uri"])
-    if "parent" in item.keys() and item["parent"] in api_resources.keys():
+    if "parent" in item.keys():
+        item = cast(models.RawWebResourceWithParent, item)
+        assert item["parent"] in api_resources.keys()
         res = copy.deepcopy(api_resources[item["parent"]])
         res.label = item["name"]
         res.uri = item["uri"]
         res.url = url
     else:
+        item = cast(models.RawResource, item)
         res = models.Resource(
             label=item["name"],
             uri=item["uri"],
@@ -64,15 +68,19 @@ def process_web_resource(
 
 
 def process_rpkg_resource(
-    item: Dict, api_resources: Dict[str, models.Resource]
+    item: Union[models.RawRpkgResourceWithParent, models.RawResource],
+    api_resources: Dict[str, models.Resource],
 ) -> models.Resource:
     url = rpkg_url_formatter(item["uri"])
-    if "parent" in item.keys() and item["parent"] in api_resources.keys():
+    if "parent" in item.keys():
+        item = cast(models.RawRpkgResourceWithParent, item)
+        assert item["parent"] in api_resources.keys()
         res = copy.deepcopy(api_resources[item["parent"]])
         res.label = item["uri"]
         res.uri = item["uri"]
         res.url = url
     else:
+        item = cast(models.RawResource, item)
         res = models.Resource(
             label=item["uri"],
             uri=item["uri"],

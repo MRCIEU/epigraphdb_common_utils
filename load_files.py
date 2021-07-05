@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any, Dict
+from typing import Dict
 
 import yaml
 
@@ -18,7 +18,7 @@ with SCHEMA_FILE.open("r") as f:
     meta_rels_dict_raw: Dict[str, models.RawMetaRel] = schema_dict["meta_rels"]
 
 with RESOURCES_FILE.open("r") as f:
-    resources_dict_raw: Dict[str, Any] = yaml.safe_load(f)
+    resources_dict_raw: models.RawResources = yaml.safe_load(f)
 
 with RESOURCES_EXTRA_FILE.open("r") as f:
-    resources_extra_dict: Dict[str, Any] = yaml.safe_load(f)
+    resources_extra_dict: models.RawResourcesExtra = yaml.safe_load(f)

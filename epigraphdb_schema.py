@@ -1,5 +1,6 @@
 from typing import Dict
 
+from .load_files import resources_extra_dict  # noqa
 from .load_files import (
     meta_nodes_dict_raw,
     meta_rels_dict_raw,
