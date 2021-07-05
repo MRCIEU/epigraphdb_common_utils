@@ -1,52 +1,29 @@
-from pathlib import Path
-from typing import Any, Dict
+from typing import Dict
 
-import yaml
-
-from .schema_utils.models import (
-    DataDictNode,
-    DataDictRel,
-    RawMetaNode,
-    RawMetaRel,
+from .load_files import (
+    meta_nodes_dict_raw,
+    meta_rels_dict_raw,
+    resources_dict_raw,
 )
-from .schema_utils.processing import (
-    collect_doc,
-    process_resources,
-    sanitise_meta_nodes,
-    sanitise_meta_rels,
+from .schema_utils import models, resources, schema
+
+resources_dict: models.EpigraphdbPlatformResources = (
+    resources.process_resources(resources_dict_raw)
 )
 
-SCHEMA_FILE = Path(__file__).parent / "db_schema.yaml"
-RESOURCES_FILE = Path(__file__).parent / "resources.yml"
-RESOURCES_EXTRA_FILE = Path(__file__).parent / "resources_extra.yml"
-
-
-with SCHEMA_FILE.open("r") as f:
-    schema_dict = yaml.safe_load(f)
-    meta_nodes_dict_raw: Dict[str, RawMetaNode] = schema_dict["meta_nodes"]
-    meta_rels_dict_raw: Dict[str, RawMetaRel] = schema_dict["meta_rels"]
-
-with RESOURCES_FILE.open("r") as f:
-    resources_dict_raw: Dict[str, Any] = yaml.safe_load(f)
-
-with RESOURCES_EXTRA_FILE.open("r") as f:
-    resources_extra_dict: Dict[str, Any] = yaml.safe_load(f)
-
-resources_dict = process_resources(resources_dict_raw)
-
-meta_nodes_dict: Dict[str, DataDictNode] = sanitise_meta_nodes(
+meta_nodes_dict: Dict[str, models.DataDictNode] = schema.sanitise_meta_nodes(
     meta_nodes_dict_raw, resources_dict
 )
-meta_rels_dict: Dict[str, DataDictRel] = sanitise_meta_rels(
+meta_rels_dict: Dict[str, models.DataDictRel] = schema.sanitise_meta_rels(
     meta_rels_dict_raw, resources_dict
 )
 
 meta_nodes_property_docs: Dict[str, Dict[str, str]] = {
-    meta_node_name: collect_doc(meta_node_value)
+    meta_node_name: schema.collect_doc(meta_node_value)
     for meta_node_name, meta_node_value in meta_nodes_dict.items()
 }
 
 meta_rels_property_docs: Dict[str, Dict[str, str]] = {
-    meta_rel_name: collect_doc(meta_rel_value)
+    meta_rel_name: schema.collect_doc(meta_rel_value)
     for meta_rel_name, meta_rel_value in meta_rels_dict.items()
 }

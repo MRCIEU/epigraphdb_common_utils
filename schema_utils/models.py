@@ -5,24 +5,34 @@ from typing_extensions import Literal, TypedDict
 
 
 @dataclass
-class EntityProperty:
-    "The property fields for a meta entity."
-    doc: str
-    type: str
-    required: bool
-
-
-@dataclass
 class Resource:
+    """A harmonized resource item.
+
+    - Harmonized / standardized from all different
+      resource sources (api, rpkg, web)
+    - Meta entity level.
+    """
+
+    # descriptive label
     label: str
+    # uri / id
     uri: str
+    # url to resource
     url: str
+    # member meta nodes
     meta_nodes: List[str]
+    # member meta rels
     meta_rels: List[str]
+    # meta ents (meta nodes) as queriable ents
     query_ents: List[str]
+    # meta ent triples
     triples: Optional[Set[str]] = None
-    # TODO: this should probably go
-    assoc_ents: Optional[List[str]] = None
+
+
+class EpigraphdbPlatformResources(TypedDict):
+    api: Dict[str, Resource]
+    web: Dict[str, Resource]
+    rpkg: Dict[str, Resource]
 
 
 @dataclass
@@ -32,9 +42,18 @@ class LinkedResource:
 
 @dataclass
 class MetaEntityResources:
+    # str here is the key to link to resource
     api: Optional[Dict[str, LinkedResource]]
     web: Optional[Dict[str, LinkedResource]]
     rpkg: Optional[Dict[str, LinkedResource]]
+
+
+@dataclass
+class EntityProperty:
+    "The property fields for a meta entity."
+    doc: str
+    type: str
+    required: bool
 
 
 @dataclass
