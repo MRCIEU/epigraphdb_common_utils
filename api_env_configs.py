@@ -124,4 +124,11 @@ env_configs = EnvConfigs(
         PQTL graph: version number
         """,
     ),
+    # paired neural
+    neural_url=EnvVar(
+        "NEURAL_URL",
+        desc="""
+        Paired `epigraphdb_neural` URL
+        """,
+    ),
 )
