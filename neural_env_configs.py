@@ -31,4 +31,12 @@ env_configs = EnvConfigs(
         url to the models api.
         """,
     ),
+    # paired models api
+    transformers_api_url=EnvVar(
+        "NEURAL_TRANSFORMERS_API_URL",
+        default="localhost:8017",
+        desc="""
+        url to the models api.
+        """,
+    ),
 )
